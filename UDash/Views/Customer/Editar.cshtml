@@ -1,0 +1,167 @@
+﻿@model CRM.Models.ViewModels._CustomerEditViewModel
+
+
+<div class="main">
+	@await Component.InvokeAsync("Header")
+	<section class="customerBody">
+		<article class="customerCard">
+			<div id="deleteAlertContainer">
+				<div id="deleteAlert" class="deleteAlert">
+					<span>
+						Deseja realmente deletar o cliente:<br />
+						<b>@Model.RazaoSocial</b>
+					</span>
+				</div>
+			</div>
+			<h3>Informações</h3>
+			<div class="card_container">
+				<form asp-action="Edit" asp-action="Delete" asp-controller="Customer" method="post" class="card_content" id="EditForm">
+					<input asp-for="@Model.Id" hidden />
+					<div class="contentHeader">
+						<span><b>Cliente:</b>@Model.RazaoSocial</span>
+					</div>
+					<div class="contentBody">
+						<div class="contentBody-labels">
+							<label>Código:</label>
+							<label>CNPJ:</label>
+							<label>Razão Social:</label>
+							<label>Comprador(es)</label>
+							<label for="select_disabled">Status:</label>
+							<label>Phone:</label>
+							<label>Email:</label>
+							<label>Cidade:</label>
+							<label>UF:</label>
+							<label>Data última compra:</label>
+							<label>Valor última compra:</label>
+							<label>Próximo contato:</label>
+							<label>Último contato:</label>
+							<label>Registrar contato:</label>
+						</div>
+						<div class="contentBody-inputs">
+							<input class="editable" value="@Model.Codigo" asp-for="@Model.Codigo" disabled />
+							<input class="editable" value="@Model.Cnpj" asp-for="@Model.Cnpj" disabled />
+							<input class="editable" value="@Model.RazaoSocial" asp-for="@Model.RazaoSocial" disabled />
+							<input class="editable" value="@Model.Contact" asp-for="@Model.Contact" disabled />
+							<select class="editable" type="text" value="@Model.Status" asp-for="@Model.Status"
+									disabled>
+								<option value="true">Ativo</option>
+								<option value="false">Inativo</option>
+							</select>
+							@foreach (var item in Model.Phones)
+							{
+								<input class="editable" value="@item" asp-for="@Model.Phones" name="Phones" disabled />
+							}
+
+							@foreach (var item in Model.Emails)
+							{
+								<input class="editable" value="@item" asp-for="@Model.Phones" name="Emails" disabled />
+							}
+
+
+							<input class="editable" value="@Model.Cidade" asp-for="@Model.Cidade" disabled />
+							<input class="editable" value="@Model.Uf" asp-for="@Model.Uf" disabled />
+							<input class="editable" type="date" value="@Model.LastPurchaseDate.ToString("yyyy-MM-dd")" asp-for="@Model.LastPurchaseDate" disabled />
+							<input class="editable" value="@Model.LastPurchaseValue" asp-for="@Model.LastPurchaseValue" disabled />
+							<input class="editable" id="reciver" type="date" name="@Model.NextContactDate.ToString("yyyy-MM-dd")" asp-for="@Model.NextContactDate" disabled />
+							@foreach (var item in Model.ContactRecordsDate)
+							{
+								var date = DateTime.Parse(item).ToString("yyyy-MM-dd");
+								<input class="" type="date" value="@date" asp-for="@date" name="ContactRecordsDate" disabled />
+							}
+							@foreach (var item in Model.ContactRecordsAnotation)
+							{
+								<input class="editable" value="@item" asp-for="@item" name="ContactRecordsAnotation" disabled />
+							}
+
+							
+						</div>
+
+						<section class="registrationsContainer">
+
+							<div class="registrationsCard">
+								<span>20/01/2023 08:10:23 - @Model.RazaoSocial</span>
+								<div class="contentRegistration">
+									Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+									Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+									when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+								</div>
+							</div><div class="registrationsCard">
+								<span>20/01/2023 08:10:23 - @Model.RazaoSocial</span>
+								<div class="contentRegistration">
+									Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+									Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+									when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+								</div>
+							</div><div class="registrationsCard">
+								<span>20/01/2023 08:10:23 - @Model.RazaoSocial</span>
+								<div class="contentRegistration">
+									Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+									Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+									when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+								</div>
+							</div>
+							<div class="registrationsCard">
+								<span>20/01/2023 08:10:23 - @Model.RazaoSocial</span>
+								<div class="contentRegistration">
+									Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+									Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+									when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+								</div>
+							</div>
+							<div class="registrationsCard">
+								<span>20/01/2023 08:10:23 - @Model.RazaoSocial</span>
+								<div class="contentRegistration">
+									Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+									Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+									when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+								</div>
+							</div>
+							<div class="registrationsCard">
+								<span>20/01/2023 08:10:23 - @Model.RazaoSocial</span>
+								<div class="contentRegistration">
+									Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+									Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+									when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+								</div>
+							</div>
+							<div class="registrationsCard">
+								<span>20/01/2023 08:10:23 - @Model.RazaoSocial</span>
+								<div class="contentRegistration">
+									Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+									Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+									when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+								</div>
+							</div>
+						</section>
+
+					</div>
+					<div class="card_cta">
+						<div id="editOrDelete">
+							<button type="button" class="card_cta-edit" id="btnEdit">Editar</button>
+							<button type="button" class="card_cta-delet" id="deletarBtn">Deletar</button>
+						</div>
+						<div id="cancelOrSave">
+							<button type="reset" class="card_cta-delet cancelDelete" id="cancelEdit">Cancelar</button>
+							<button type="button" class="card_cta-saveChanges" id="card_cta-saveChanges">Salvar</button>
+						</div>
+
+						<div id="deleteConfirm">
+							<button type="reset" class="card_cta-delet cancelDelete" id="cancelDelete">Cancelar</button>
+							<button type="button" class="card_cta-saveChanges" id="confirmDelete">Confirmar</button>
+						</div>
+
+						<button id="btnSubmitDelete" class="btnSubmit" type="submit" asp-action="Delete"></button>
+						<button id="btnSubmitEdit" class="btnSubmit" type="submit" asp-action="Edit"></button>
+					</div>
+				</form>
+			</div>
+		</article>
+	</section>
+
+</div>
+<footer class="footer">
+	<p> &copy; <a href="#">U.Code</a> development</p>
+	<p class="footer_link">Visite nosso site <a href="#">U.code</a> </p>
+</footer>
+<script src="/js/customer.js"></script>
+

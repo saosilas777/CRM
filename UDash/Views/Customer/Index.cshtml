@@ -1,0 +1,175 @@
+﻿@model List<_CustomerModel>
+
+
+
+<div class="main">
+	@await Component.InvokeAsync("Header")
+	<div class="actionsContainer">
+		<div class="envio-arquivos">
+			<div class="arquivos_title">
+				<span>Faça o upload de sua planilha <b class="excel">excel</b> aqui!</span>
+			</div>
+
+			<form asp-action="SendFile" asp-controller="SendFile" method="post" enctype="multipart/form-data">
+				<label for="btn-send-file" class="btn btn-primary input-file col-md-2 text-center">Procurar Arquivo</label>
+				<input id="btn-send-file" class="btn btn-success input-file col-md-2 text-center" name="uploadFile" type="file" multiple hidden />
+				<button class="col-md-2 input-file-btn" type="submit">Enviar</button>
+			</form>
+		</div>
+		<div class="addCustomerBtn">
+			<a asp-action="Create" asp-controller="Customer">Adicionar Novo Cliente <i class="fa-solid fa-hand-pointer"></i></a>
+		</div>
+	</div>
+
+	<section id="table_row">
+		<!-- <table id="myTable2" class="table_Securytis"> -->
+		<div class="card">
+			<div class="card_header">
+				<div class="table_float">Clientes</div>
+			</div>
+			<div class="card_body">
+
+				<table id="myTable" class="myTable display wrap">
+
+					<thead>
+
+						<tr>
+
+							<th>
+								Codigo
+							</th>
+							<th>
+								Razão Social / CNPJ
+							</th>
+							<th class="th_status">
+								<select id="selection">
+									<option value="Todos">Todos</option>
+									<option value="Inativo">Inativo</option>
+									<option value="Ativo">Ativo</option>
+								</select>
+							</th>
+							<th>
+								Email
+							</th>
+							<th>
+								Telefone
+							</th>
+							<th>
+								Contato
+							</th>
+							@*<th>
+								Cidade
+							</th>*@
+							<th>
+								UF
+							</th>
+							<th id="lastPurchase">
+								Última Compra
+							</th>
+							<th>
+								Valor
+							</th>
+							<th>
+								Último contato
+							</th>
+							<th class="maxWidth">
+								Último Registro
+							</th>
+							<th>
+								Próximo Contato<br>
+								e Ações
+							</th>
+						</tr>
+					</thead>
+
+					<tbody id="tbody">
+
+						@foreach (var item in Model)
+						{
+							<tr>
+
+								<td>
+
+									<p class="thead_id ">@item.Codigo</p>
+
+								</td>
+								<td class="razao minWidth">
+									<p>
+										@item.RazaoSocial
+									</p>
+									<p>
+										@item.Cnpj
+									</p>
+								</td>
+								<td class="td_status">
+
+									@if (item.Status == true)
+									{
+										<p class="status">
+											Ativo
+										</p>
+									}
+									else
+									{
+										<p class="status status_inactive">
+											Inativo
+										</p>
+									}
+								</td>
+								@foreach (var email in item.Emails)
+								{
+									<td>
+										<p>@email.Email</p>
+									</td>
+
+								}
+								@foreach (var phone in item.Phones)
+								{
+									<td>
+										<p>@phone.Phone</p>
+									</td>
+
+								}
+								<td>
+									@item.Contact
+								</td>
+								@*<td>
+									<p>@item.Cidade</p>
+								</td>*@
+								<td class="td_width">
+									<p>@item.Uf</p>
+								</td>
+								<td class="lastPurchase">
+									@item.LastPurchaseDate.ToString("yyyy/MM/dd")
+								</td>
+								<td>
+									<p>@item.LastPurchaseValue.Value.ToString("F2")</p>
+								</td>
+
+								<td>
+									@item.ContactRecords[0].RegistrationDate.ToShortDateString()
+									
+								</td>
+								<td class="minWidth">
+									<p class="overflowAuto">@item.ContactRecords[0].Anotation.ToString()</p>
+								</td>
+								<td>
+									<p><a asp-action="Editar" asp-controller="Customer" asp-route-id="@item.Id" class="table_actions">@item.NextContactDate.ToString("yyyy/MM/dd") <br><i class="fa-solid fa-pen-to-square"></i> <i class="fa-regular fa-trash-can"></i></a></p>
+								</td>
+
+							</tr>
+						}
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</section>
+</div>
+<footer class="footer">
+	<p> &copy; <a href="#">U.Code</a> development</p>
+	<p class="footer_link">Visite nosso site <a href="#">U.code</a> </p>
+</footer>
+<script src="/js/SelectTableItems.js"></script>
+
+

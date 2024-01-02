@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>Z:\udash\UDash\bin\Release\net6.0\publish\</_PublishTargetUrl>
+    <History>True|2023-12-12T14:18:35.2778668Z;True|2023-12-12T11:07:23.2165628-03:00;True|2023-12-11T19:05:01.2545529-03:00;True|2023-12-07T16:36:52.4895744-03:00;True|2023-12-06T21:01:37.2994594-03:00;True|2023-12-06T16:18:44.6544531-03:00;True|2023-12-05T12:35:36.6574126-03:00;True|2023-12-04T21:59:38.3506522-03:00;False|2023-12-04T21:59:18.4455412-03:00;False|2023-12-04T21:58:41.0456421-03:00;False|2023-12-04T21:58:18.6121011-03:00;True|2023-12-04T21:55:55.1966366-03:00;True|2023-12-04T18:23:33.4713073-03:00;True|2023-12-04T17:57:39.4076738-03:00;True|2023-12-04T11:24:01.2519286-03:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,30 @@
+﻿@model SendFileImageModel
+
+
+<div class="main">
+@*	<div class="headerWithAvatar">
+	</div>*@
+		@await Component.InvokeAsync("Header")
+
+	<div class="envio-arquivos">
+		<div class="arquivos_title">
+			<span>Faça o upload do seu <b class="excel">avatar ".jpg"</b> aqui!</span>
+		</div>
+		<form asp-action="sendFileImage" asp-controller="SendFile" method="post">
+			@*enctype="multipart/form-data"*@
+			<input id="btn-send-text" name="url" hidden/>
+			<label for="btn-send-file" class="btn btn-primary input-file col-md-2 text-center">Procurar Arquivo</label>
+			<input id="btn-send-file" onchange="convertImage()" class="btn btn-success input-file col-md-2 text-center" name="uploadFile" type="file" multiple hidden />
+			<button class="col-md-2 input-file-btn" type="submit">Enviar</button>
+		</form>
+		
+	</div>
+	<div id="apresentar" style="width:300px;height:300px;margin-top:1rem"></div>
+</div>
+<footer class="footer">
+	<p> &copy; <a href="#">U.Code</a> development</p>
+	<p class="footer_link">Visite nosso site <a href="#">U.code</a> </p>
+</footer>
+
+
+<script src="/js/ConvertImageBase64.js"></script>

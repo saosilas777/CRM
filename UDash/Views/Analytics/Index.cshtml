@@ -1,0 +1,198 @@
+﻿@model CRM.Models.ViewModels.AnalyticsViewModel
+
+@{
+	double _totalPortfolio = @Model.TotalPortfolio;
+	double _averageTicket = @Model.AverageTicket;
+
+	string totalPortfolio = _totalPortfolio.ToString("C2", new System.Globalization.CultureInfo("pt-BR"));
+	string averageTicket = _averageTicket.ToString("C2", new System.Globalization.CultureInfo("pt-BR"));
+}
+
+<div class="main">
+	@await Component.InvokeAsync("Header")
+	<section class="content-cards display analytics">
+		<div class="tickets dollar">
+			<span class="ticket_figure"><i class="fa-solid fa-hand-holding-dollar"></i></span>
+			<div class="ticket_header">
+				<p>Carteira Total</p>
+			</div>
+			<span class="horizontal-line"></span>
+			<div class="ticket_content">
+
+				<p class="margin_right"></p>
+				<p id="TotalPortfolio">@totalPortfolio</p>
+			</div>
+		</div>
+		<div class="tickets people">
+			<span class="ticket_figure"><i class="fa-solid fa-people-group"></i></span>
+			<div class="ticket_header">
+				<p>Clientes Ativos</p>
+			</div>
+			<span class="horizontal-line"></span>
+			<div class="ticket_content">
+				<p>@Model.TotalCustomer</p>
+			</div>
+		</div>
+		<div class="tickets arrow">
+			<span class="ticket_figure"><i class="fa-solid fa-arrow-trend-up"></i></span>
+			<div class="ticket_header">
+				<p>Ticket Médio</p>
+			</div>
+			<span class="horizontal-line"></span>
+			<div class="ticket_content">
+				<p>@averageTicket</p>
+			</div>
+		</div>
+		<div class="tickets handshake">
+			<span class="ticket_figure"><i class="fa-regular fa-handshake"></i></span>
+			<div class="ticket_header">
+				<p>Churns</p>
+			</div>
+			<span class="horizontal-line"></span>
+			<div class="ticket_content">
+				<p>@Model.Churns.ToString()</p>
+			</div>
+		</div>
+
+	</section>
+
+	<!-- Graphics -->
+
+	<button class="insertDataBtn" id="insertDataBtn" type="button">Inserir dados</button>
+	<div id="insert">
+		<form asp-action="ReceberDatos" asp-controller="Analytics" method="post">
+			<div class="insertContent">
+				<h4>Reuniões da semana</h4>
+				<div class="divFlexRow">
+					<div class="divFlexColumn">
+						<label>
+							Segunda:
+						
+						</label>
+						<label>
+							Terça:
+						
+						</label>
+						<label>
+							Quarta:
+						
+						</label>
+						<label>
+							Quinta:
+						
+						</label>
+						<label>
+							Sexta:
+						
+						</label>
+					</div>
+					<div class="spaceBetween"></div>
+					<div class="divFlexColumn">
+						@*<input class="meeting" value="@Model.Meetings.Segunda" asp-for="@Model.Meetings.Segunda" />
+						<input class="meeting" value="@Model.Meetings.Terca" asp-for="@Model.Meetings.Terca" />
+						<input class="meeting" value="@Model.Meetings.Quarta" asp-for="@Model.Meetings.Quarta" />
+						<input class="meeting" value="@Model.Meetings.Quinta" asp-for="@Model.Meetings.Quinta" />
+						<input class="meeting" value="@Model.Meetings.Sexta" asp-for="@Model.Meetings.Sexta" />*@
+					</div>
+				</div>
+			</div>
+			<div class="insertContent">
+				<h4>No Shows da semana</h4>
+				<div class="divFlexRow">
+					<div class="divFlexColumn">
+						<label>
+							Segunda:
+						</label>
+						<label>
+							Terça:
+						</label>
+						<label>
+							Quarta:
+						</label>
+						<label>
+							Quinta:
+						</label>
+						<label>
+							Sexta:
+						</label>
+					</div>
+					<div class="spaceBetween"></div>
+					<div class="divFlexColumn">
+						@*<input class="noshows" value="@Model.NoShows.Segunda" asp-for="@Model.NoShows.Segunda" />
+						<input class="noshows" value="@Model.NoShows.Terca" asp-for="@Model.NoShows.Terca" />
+						<input class="noshows" value="@Model.NoShows.Quarta" asp-for="@Model.NoShows.Quarta" />
+						<input class="noshows" value="@Model.NoShows.Quinta" asp-for="@Model.NoShows.Quinta" />
+						<input class="noshows" value="@Model.NoShows.Sexta" asp-for="@Model.NoShows.Sexta" />*@
+					</div>
+				</div>
+			</div>
+			<div class="insertContent churns">
+				<h4>Churns da semana</h4>
+
+				<div class="divFlexRow ">
+					<div class="divFlexColumn">
+						<label>
+							Churns:
+						</label>
+					</div>
+					<div class="spaceBetween"></div>
+					<div class="divFlexColumn">
+						<input type="text" class="churns" value="@Model.Churns" asp-for="@Model.Churns" />
+					</div>
+				</div>
+			</div>
+			<div class="insertContent" style="background-image:none">
+				<button class="enviarDataBtn" type="submit">Enviar</button>
+			</div>
+
+
+		</form>
+	</div>
+	<section class="content_graphics-cards">
+		<article class="tickets">
+			<div class="content_graphics-content">
+				<p>Reuniões da semana</p>
+			</div>
+			<div class="content_graphics-graphics">
+				<input hidden id="meetings" value="1,2,3,4,5,10" />
+				<canvas id="myChart"></canvas>
+			</div>
+		</article>
+		<article class="tickets">
+			<div class="content_graphics-content">
+				<p>No Shows da semana</p>
+			</div>
+			<div class="content_graphics-graphics">
+				<input hidden id="noShows" value="@*@Model.NoShows*@" />
+				<canvas id="myChart2"></canvas>
+			</div>
+		</article>
+		<article class="tickets">
+			<div class="content_graphics-content">
+				<p>Reuniões mês</p>
+			</div>
+			<div class="content_graphics-graphics">
+				<canvas id="myChart3"></canvas>
+			</div>
+		</article>
+		<article class="tickets">
+			<div class="content_graphics-content">
+				<p>No Shows mês</p>
+			</div>
+			<div class="content_graphics-graphics">
+				<canvas id="myChart4"></canvas>
+			</div>
+		</article>
+
+	</section>
+
+
+</div>
+<footer class="footer">
+	<p> &copy; <a href="#">U.Code</a> development</p>
+	<p class="footer_link">Visite nosso site <a href="#">U.code</a> </p>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/js/chart.js"></script>
+
+

@@ -1,0 +1,81 @@
+﻿@model CRM.Models.ViewModels._CustomerCreateViewModel
+
+@*@{
+
+	var emails = Model.Emails;
+	var phones = Model.Phones;
+}*@
+
+<div class="main">
+	@await Component.InvokeAsync("Header")
+	<div class="formCreateCustomer">
+		<h1>Cadastro de Cliente</h1>
+
+		<form asp-action="Create" asp-controller="Customer" method="post">
+			<label for="codigo" class="span3">
+				<p>Código</p>
+				<input id="codigo" type="text" asp-for="Codigo" maxlength="5" />
+			</label>
+			<label for="cnpj" class="span3">
+				<p class="bgWhite">
+					Cnpj
+				</p>
+				<input id="cnpj" type="text" asp-for="Cnpj" />
+			</label>
+			<label for="razaoSocial" class="span3">
+				<p>
+					Razão Social
+				</p>
+				<input id="razaoSocial" type="text" asp-for="RazaoSocial" />
+			</label>
+			<label for="cidade" class="span3 ">
+				<p class="bgWhite">
+					Cidade
+				</p>
+				<input id="cidade" type="text" asp-for="Cidade" />
+			</label>
+			<label for="uf" class="select span6">
+				<p>
+					UF
+				</p>
+				<select id="uf" asp-for="Uf">
+					<option value="SP">SP</option>
+					<option value="RJ">RJ</option>
+					<option value="MG">MG</option>
+					<option value="BA">BA</option>
+				</select>
+			</label>
+			<div id="email" class="span3">
+			<label for="email" class="span3">
+				<p>
+						<a id="InsertEmailField" class="InsertField">
+							Email
+							<i class="fa-solid fa-plus"></i>
+						</a>
+				</p>
+				<input id="email" type="email" asp-for="Emails" name="Emails"/>
+			</label>
+			</div>
+
+			<div id="phone" class="span3">
+			<label for="phone" class="span3">
+				<p>
+						<a id="InsertPhoneField" class="InsertField">
+							Telefone
+						<i class="fa-solid fa-plus"></i></a>
+				</p>
+					<input id="phone" type="text" asp-for="Phones" name="Phones" value=""/>
+			</label>
+			
+			</div>
+
+			<div class="formCreateCustomer_buttons span6">
+				<Button class="backBtn" asp-action="Index" asp-controller="Customer">Voltar</Button>
+				<Button class="cleanBtn" type="reset">Limpar campos</Button>
+				<Button class="saveBtn" type="submit">Salvar</Button>
+			</div>
+
+		</form>
+	</div>
+</div>
+<script src="/js/InsertNewField.js"></script>
