@@ -64,7 +64,9 @@ namespace CRM.Services
 
 					_ContactRecords _contactRecords = new();
 					_contactRecords.Id = Guid.NewGuid();
-					_contactRecords.RegistrationDate = DateTime.Parse(worksheet.Cells[row, 12].Value.ToString());
+					/*_contactRecords.RegistrationDate = DateTime.Parse(worksheet.Cells[row, 12].Value.ToString());*/
+					_contactRecords.RegistrationDate = DateTime.Now;
+					
 					List<_ContactRecords> contatos = new();
 					contatos.Add(_contactRecords);
 
@@ -84,7 +86,6 @@ namespace CRM.Services
 						Uf = worksheet.Cells[row, 9].Value.ToString(),
 						LastPurchaseDate = DateTime.Parse(worksheet.Cells[row, 10].Value.ToString()),
 						LastPurchaseValue = double.Parse(worksheet.Cells[row, 11].Value.ToString()),
-						ContactRecords = contatos,
 						NextContactDate = DateTime.Parse(worksheet.Cells[row, 13].Value.ToString()),
 						UserId = user.Id,
 						

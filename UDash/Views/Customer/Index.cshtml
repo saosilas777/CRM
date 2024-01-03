@@ -147,11 +147,26 @@
 								</td>
 
 								<td>
-									@item.ContactRecords[0].RegistrationDate.ToShortDateString()
-									
+									@if (@item.ContactRecords.Count() == 0)
+									{
+										<p>01/01/1999</p>
+									}
+									else
+									{
+										var count = @item.ContactRecords.Count();
+										<p>@item.ContactRecords[count-1].RegistrationDate.ToShortDateString()</p>
+									}
 								</td>
 								<td class="minWidth">
-									<p class="overflowAuto">@item.ContactRecords[0].Anotation.ToString()</p>
+									@if (@item.ContactRecords.Count() == 0)
+									{
+										<p>Nenhum registro de contato</p>
+									}
+									else
+									{
+										var count = @item.ContactRecords.Count();
+										<p>@item.ContactRecords[count-1].Anotation</p>
+									}
 								</td>
 								<td>
 									<p><a asp-action="Editar" asp-controller="Customer" asp-route-id="@item.Id" class="table_actions">@item.NextContactDate.ToString("yyyy/MM/dd") <br><i class="fa-solid fa-pen-to-square"></i> <i class="fa-regular fa-trash-can"></i></a></p>

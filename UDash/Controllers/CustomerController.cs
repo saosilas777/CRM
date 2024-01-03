@@ -61,6 +61,12 @@ namespace CRM.Controllers
 			
 			return RedirectToAction("Index", "Customer");
 		}
+		[HttpPost]
+		public IActionResult RegistrationContact(_CustomerEditViewModel customer)
+		{
+			_customer.RegistrationContact(customer.ContactRecordsAnotation[0], customer.Id);
+			return RedirectToAction("Editar", "Customer",new { customer.Id });
+		}
 
 		[HttpPost]
 		public IActionResult Delete(_CustomerModel customer)

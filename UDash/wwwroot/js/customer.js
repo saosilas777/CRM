@@ -1,5 +1,7 @@
 ﻿(function () {
     'use strict'
+
+
     const inputs = document.querySelectorAll('.editable')
 
     const btnEdit = document.querySelector('#btnEdit')
@@ -25,7 +27,7 @@
     const btnSubmitDelete = document.querySelector('#btnSubmitDelete')
     const btnSave = document.getElementById('card_cta-saveChanges')
     const deleteAlert = document.getElementById('deleteAlertContainer')
-   
+
 
 
     btnEdit.addEventListener('click', disable)
@@ -34,7 +36,7 @@
     btnconfirmDelete.addEventListener('click', SubmitDelete)
 
 
-    function SubmitEdit () {
+    function SubmitEdit() {
         btnSubmitEdit.click();
     }
     function SubmitDelete() {
@@ -65,7 +67,7 @@
         editOrDelete.style.display = 'none'
         deleteConfirm.style.display = 'flex'
         deleteAlert.style.display = 'flex'
-       
+
     }
 
     function cancelDelete() {
@@ -73,5 +75,39 @@
         editOrDelete.style.display = 'flex'
         deleteConfirm.style.display = 'none'
     }
-      
+
+
+
+    const insertBtn = document.getElementById('insertBtn')
+    const cancelInsertBtn = document.getElementById('cancelInsertBtn')
+    const saveInsertBtn = document.getElementById('saveInsertBtn')
+    const editableInsert = document.querySelectorAll('.editableInsert')
+
+
+    insertBtn.addEventListener('click', function () {
+        insertBtn.style.display = 'none'
+        cancelInsertBtn.style.display = 'flex'
+        saveInsertBtn.style.display = 'flex'
+        InsertRegistration();
+    })
+
+    cancelInsertBtn.addEventListener('click', function () {
+        insertBtn.style.display = 'flex'
+        cancelInsertBtn.style.display = 'none'
+        saveInsertBtn.style.display = 'none'
+        InsertRegistration()
+    })
+
+    saveInsertBtn.addEventListener('click', function () {
+        const submitInsertBtn = document.getElementById('submitInsertBtn')
+        submitInsertBtn.click();
+    })
+
+
+    function InsertRegistration() {
+        editableInsert.forEach(function (item) {
+            item.disabled = !item.disabled
+        })
+    }
+
 })()

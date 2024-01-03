@@ -21,8 +21,8 @@ namespace CRM.Repository
 
 		public _CustomerEditViewModel BuscarPorId(Guid id)
 		{
-			var custumerDb = _context.Customers.Include(x => x.ContactRecords).Include(x =>x.Emails).Include(x => x.Phones).FirstOrDefault(x => x.Id == id);
-			
+			var custumerDb = _context.Customers.Include(x => x.ContactRecords).Include(x => x.Emails).Include(x => x.Phones).FirstOrDefault(x => x.Id == id);
+
 			string[] emails = new string[custumerDb.Emails.Count()];
 			string[] phones = new string[custumerDb.Phones.Count()];
 			string[] anotation = new string[custumerDb.ContactRecords.Count()];
@@ -31,12 +31,12 @@ namespace CRM.Repository
 			for (int i = 0; i < custumerDb.Emails.Count(); i++)
 			{
 				emails[i] = custumerDb.Emails[i].Email;
-				
+
 			}
 			for (int i = 0; i < custumerDb.Phones.Count(); i++)
 			{
 				phones[i] = custumerDb.Phones[i].Phone;
-				
+
 			}
 			for (int i = 0; i < custumerDb.ContactRecords.Count(); i++)
 			{
@@ -95,7 +95,7 @@ namespace CRM.Repository
 		}
 		public bool CreateAll(List<_CustomerModel> customers)
 		{
-			
+
 			_context.AddRange(customers);
 			_context.SaveChanges();
 			return true;
@@ -130,7 +130,7 @@ namespace CRM.Repository
 		{
 			List<_CustomerModel> _customers = new List<_CustomerModel>();
 
-			for(int i = 0;i< 20; i++)
+			for (int i = 0; i < 20; i++)
 			{
 				_CustomerModel customer = new _CustomerModel
 				{
@@ -165,6 +165,29 @@ namespace CRM.Repository
 			_context.AddRange(customers);
 			_context.SaveChanges();
 			return customers;
+		}
+
+		public _CustomerModel BuscarCustomerPorId(Guid id)
+		{
+			var customer = _context.Customers.FirstOrDefault(x => x.Id == id);
+			return customer;
+		}
+		public bool RegistrationContact(string anotation, Guid id)
+		{
+			var _customer = BuscarCustomerPorId(id);
+			_ContactRecords contacts = new();
+			contacts.Customer = _customer;
+			contacts.Anotation = anotation;
+			contacts.RegistrationDate = DateTime.Now;
+
+			List<_ContactRecords> _contacts = new();
+			_contacts.Add(contacts);
+
+			_context.ContactRecords.AddRange(_contacts);
+			_context.SaveChanges();
+
+			return true;
+
 		}
 
 		/*public List<_CustomerModel> BuscarContasIdStarlord(Guid id)

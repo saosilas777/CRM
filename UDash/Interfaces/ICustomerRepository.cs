@@ -12,6 +12,8 @@ namespace CRM.Interfaces
 		bool Deletar(_CustomerModel customer);
 		List<_CustomerModel> AdicionarTodos(List<_CustomerModel> customers);
 
+		bool RegistrationContact(string anotation, Guid id);
+
 
 
 	}

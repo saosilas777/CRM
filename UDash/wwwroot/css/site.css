@@ -1013,7 +1013,7 @@ table.myTable {
         border-radius: 4px;
     }
 
-        .contentBody-inputs *:focus {
+        .contentBody-inputs *:focus :not(button) {
             background-color: #fcff0020
         }
 
@@ -1040,7 +1040,7 @@ table.myTable {
         color: #fff;
     }
 .registrationsContainer {
-    grid-column: 8/-1;
+    grid-column: 9/-1;
     border: .6rem solid white;
     max-height: 42.1875rem;
     box-shadow: 2px 0 10px 2px black;
@@ -1048,18 +1048,24 @@ table.myTable {
     background-color: white;
     overflow: auto;
 }
+    .registrationsContainer h1{
+        font-size:1.5rem;
+        text-align:center;
+        margin-bottom:.8rem;
+        background-color:#ccc;
+        border-radius:4px;
 
-.registrationsCard {
-    border: 1px solid black;
-    border-radius: 4px;
-    background-color: #292f3e;
-    color: white;
-    padding: .5rem;
-    font-size: .9rem;
-    margin-bottom: .5rem;
-    margin-right: .5rem;
-
-}
+    }
+    .registrationsCard {
+        border: 1px solid black;
+        border-radius: 4px;
+        background-color: #292f3e;
+        color: white;
+        padding: .5rem;
+        font-size: .9rem;
+        margin-bottom: .5rem;
+        
+    }
 .registrationsContainer::-webkit-scrollbar{
     width:.8rem;
     
@@ -1082,13 +1088,29 @@ table.myTable {
     .btnSubmit {
         display: none;
     }
-
+.insertBtns {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: .5rem;
+}
 .card_cta-saveChanges {
     background-color: #31975c;
 }
-#cancelOrSave, #deleteConfirm {
-    display: none;
+.btnInsertContact {
+    width: 50%;
+    justify-content:center;
+    color: white;
+    border: none;
+    box-shadow: 1px 1px 3px 1px black;
+    cursor: pointer;
 }
+   
+
+    #cancelOrSave, #deleteConfirm {
+        display: none;
+    }
 .card_cta-edit {
     background-color: #b4b4b4;
 }
