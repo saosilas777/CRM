@@ -132,17 +132,38 @@ namespace CRM.Controllers
 		public IActionResult SendMail(string email)
 		{
 
-			if(email == null)
+			try
 			{
-				TempData["ErrorMessage"] = $"Informe um email válido para recuperar sua senha";
-				return View("ForgotPassword", email);
+				if (email == null)
+				{
+					TempData["ErrorMessage"] = $"Informe um email válido para recuperar sua senha";
+					return View("ForgotPassword", email);
+				}
+
+				var emailDb = _loginRepository.BuscarPorEmail(email);
+				if (emailDb == false)
+				{
+					TempData["ErrorMessage"] = $"Email informado não cadastrado";
+					return View("ForgotPassword");
+
+				}
+				string senhaProvisoria = Guid.NewGuid().ToString();
+				
+				if (_loginRepository.BuscarPorEmail(email))
+				{
+					_sendEmail.SendEmail(email, "Recuperação de senha", senhaProvisoria);
+				}
+				senhaProvisoria = LoginServices.HashGeneration(senhaProvisoria);
+				_loginRepository.PasswordUpdate(senhaProvisoria, email);
+				TempData["SuccessMessage"] = $"Nova senha enviada com sucesso!";
+				return View("Login");
+
 			}
-			string senhaProvisoria = "senhaProvisoria: CRM102030";
-			if (_loginRepository.BuscarPorEmail(email))
+			catch (Exception e)
 			{
-				_sendEmail.SendEmail(email,"Recuperação de senha",senhaProvisoria);
+
+				throw new Exception(e.Message);
 			}
-			return RedirectToAction("ForgotPassword","Login", email);
 
 		}
 	}

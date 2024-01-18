@@ -22,6 +22,35 @@ namespace CRM.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("CRM.Models.AnalyticsModel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("ActiveCustomers")
+                        .HasColumnType("int");
+
+                    b.Property<int>("InactiveCustomers")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Registration")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("TotalCustomers")
+                        .HasColumnType("int");
+
+                    b.Property<double>("TotalSalesMonth")
+                        .HasColumnType("float");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Analytics");
+                });
+
             modelBuilder.Entity("CRM.Models.LoginModel", b =>
                 {
                     b.Property<Guid>("Id")

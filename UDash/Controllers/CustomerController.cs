@@ -58,13 +58,13 @@ namespace CRM.Controllers
 		[HttpPost]
 		public IActionResult Edit(_CustomerEditViewModel customer)
 		{
-			
+			_customer.Atualizar(customer);
 			return RedirectToAction("Index", "Customer");
 		}
 		[HttpPost]
 		public IActionResult RegistrationContact(_CustomerEditViewModel customer)
 		{
-			_customer.RegistrationContact(customer.ContactRecordsAnotation[0], customer.Id);
+			_customer.RegistrationContact(customer.ContactRecordsAnotation[0], customer.NextContactDate, customer.Id);
 			return RedirectToAction("Editar", "Customer",new { customer.Id });
 		}
 

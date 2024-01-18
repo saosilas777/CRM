@@ -19,7 +19,7 @@ namespace CRM.Models.ViewModels
 		public double? LastPurchaseValue { get; set; }
 		public string[] ContactRecordsDate { get; set; } = new string[3];
 		public string[] ContactRecordsAnotation { get; set; } = new string[3];
-		public DateTime NextContactDate { get; set; }
+		public string NextContactDate { get; set; } = string.Empty;
 		public Guid UserId { get; set; }
 	}
 }

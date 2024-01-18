@@ -15,7 +15,16 @@ namespace CRM.Repository
 
 		public void SendFileImage(SendFileImageModel fileImage)
 		{
-			_context.Add(fileImage);
+			var urlDb = _context.ImageUrl.FirstOrDefault(x => x.UserId == fileImage.UserId);
+			if (urlDb == null)
+			{
+				_context.Add(fileImage);
+			}
+			else
+			{
+				urlDb.Url = fileImage.Url;
+				_context.Update(urlDb);
+			}
 			_context.SaveChanges();
 		}
 		public SendFileImageModel GetById(Guid id)

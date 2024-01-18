@@ -4,6 +4,18 @@
 
 <div class="main">
 	@await Component.InvokeAsync("Header")
+
+	@if (TempData["ErrorMessage"] != null)
+	{
+		<div class="alertSendFile">
+			<div id="deleteAlert" class="deleteAlert">
+				<span>
+					<b>@TempData["ErrorMessage"]</b>
+				</span>
+			</div>
+		</div>
+
+	}
 	<div class="actionsContainer">
 		<div class="envio-arquivos">
 			<div class="arquivos_title">
@@ -13,7 +25,7 @@
 			<form asp-action="SendFile" asp-controller="SendFile" method="post" enctype="multipart/form-data">
 				<label for="btn-send-file" class="btn btn-primary input-file col-md-2 text-center">Procurar Arquivo</label>
 				<input id="btn-send-file" class="btn btn-success input-file col-md-2 text-center" name="uploadFile" type="file" multiple hidden />
-				<button class="col-md-2 input-file-btn" type="submit">Enviar</button>
+				<button id="sendFileBtn" class="col-md-2 input-file-btn" type="submit">Enviar</button>
 			</form>
 		</div>
 		<div class="addCustomerBtn">
@@ -48,7 +60,7 @@
 									<option value="Ativo">Ativo</option>
 								</select>
 							</th>
-							<th>
+							<th class="wordBreak">
 								Email
 							</th>
 							<th>
@@ -58,26 +70,28 @@
 								Contato
 							</th>
 							@*<th>
-								Cidade
+							Cidade
 							</th>*@
 							<th>
 								UF
 							</th>
-							<th id="lastPurchase">
-								Última Compra
-							</th>
+							@*<th id="lastPurchase">
+							Última Compra
+							</th>*@
 							<th>
-								Valor
+								Total Mensal
 							</th>
-							<th>
+							<th id="ultimoContato">
 								Último contato
 							</th>
 							<th class="maxWidth">
 								Último Registro
 							</th>
 							<th>
-								Próximo Contato<br>
-								e Ações
+								Próximo Contato
+							</th>
+							<th>
+								Ações
 							</th>
 						</tr>
 					</thead>
@@ -98,7 +112,7 @@
 										@item.RazaoSocial
 									</p>
 									<p>
-										@item.Cnpj
+										<b>@item.Cnpj</b>
 									</p>
 								</td>
 								<td class="td_status">
@@ -118,7 +132,7 @@
 								</td>
 								@foreach (var email in item.Emails)
 								{
-									<td>
+									<td class="wordBreak">
 										<p>@email.Email</p>
 									</td>
 
@@ -134,14 +148,14 @@
 									@item.Contact
 								</td>
 								@*<td>
-									<p>@item.Cidade</p>
-								</td>*@
+							<p>@item.Cidade</p>
+							</td>*@
 								<td class="td_width">
 									<p>@item.Uf</p>
 								</td>
-								<td class="lastPurchase">
-									@item.LastPurchaseDate.ToString("yyyy/MM/dd")
-								</td>
+								@*<td class="lastPurchase">
+							@item.LastPurchaseDate.ToString("yyyy/MM/dd")
+							</td>*@
 								<td>
 									<p>@item.LastPurchaseValue.Value.ToString("F2")</p>
 								</td>
@@ -168,8 +182,33 @@
 										<p>@item.ContactRecords[count-1].Anotation</p>
 									}
 								</td>
+								<td class="lastPurchase">
+									@{
+										if (@item.NextContactDate < DateTime.Now)
+										{
+
+											<p class="">@item.NextContactDate.ToString("yyyy/MM/dd")</p>
+										}
+										else
+										{
+
+
+											<p>@item.NextContactDate.ToString("yyyy/MM/dd")</p>
+
+										}
+
+									}
+								</td>
+
 								<td>
-									<p><a asp-action="Editar" asp-controller="Customer" asp-route-id="@item.Id" class="table_actions">@item.NextContactDate.ToString("yyyy/MM/dd") <br><i class="fa-solid fa-pen-to-square"></i> <i class="fa-regular fa-trash-can"></i></a></p>
+									<a asp-action="Editar" asp-controller="Customer" asp-route-id="@item.Id" class="table_actions">
+										<div class="contact_cta">
+											<i class="fa-solid fa-pen-to-square"></i>
+											<i class="fa-regular fa-trash-can"></i>
+										</div>
+
+									</a>
+
 								</td>
 
 							</tr>
@@ -186,5 +225,7 @@
 	<p class="footer_link">Visite nosso site <a href="#">U.code</a> </p>
 </footer>
 <script src="/js/SelectTableItems.js"></script>
+<script src="/js/Alerts.js"></script>
+
 
 

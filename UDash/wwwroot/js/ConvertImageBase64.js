@@ -1,29 +1,32 @@
 ﻿function convertImage() {
-	var receberArquivo = document.getElementById('btn-send-file').files;
-	var inputText = document.getElementById('btn-send-text');
+    var receberArquivo = document.getElementById('btn-send-file').files;
+    var inputText = document.getElementById('btn-send-text');
 
-	console.log(receberArquivo);
+    console.log(receberArquivo);
 
-	if (receberArquivo.length > 0) {
+    if (receberArquivo[0].type != "image/jpeg")
+        return
 
-		carregarImagem = receberArquivo[0]
+    if (receberArquivo.length > 0) {
 
-
-		var lerArquivo = new FileReader();
-
-		lerArquivo.onload = function (arquivoCarregado) {
+        carregarImagem = receberArquivo[0]
 
 
-			let imagemBase64 = arquivoCarregado.target.result;
+        var lerArquivo = new FileReader();
 
-			var novaImagem = document.createElement('img')
-			novaImagem.src = imagemBase64;
-			console.log(imagemBase64);
+        lerArquivo.onload = function (arquivoCarregado) {
 
-			inputText.value = imagemBase64
-			document.getElementById('apresentar').innerHTML = novaImagem.outerHTML;
-		}
-		lerArquivo.readAsDataURL(carregarImagem)
-	}
+
+            let imagemBase64 = arquivoCarregado.target.result;
+
+            var novaImagem = document.createElement('img')
+            novaImagem.src = imagemBase64;
+            console.log(imagemBase64);
+
+            inputText.value = imagemBase64
+            document.getElementById('apresentar').innerHTML = novaImagem.outerHTML;
+        }
+        lerArquivo.readAsDataURL(carregarImagem)
+    }
 
 }

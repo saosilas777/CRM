@@ -11,6 +11,7 @@ namespace CRM.Interfaces
 		bool BuscarPorEmail(string email);
 		LoginModel BuscarPorId(Guid id);
 		void ChangePassword(LoginModel login);
+		bool PasswordUpdate(string password, string email);
 
 	}
 }

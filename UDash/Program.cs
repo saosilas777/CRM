@@ -29,7 +29,8 @@ builder.Services.AddScoped<ISendEmail, SendEmail>();
 builder.Services.AddScoped<SendFileImageRepository, SendFileImageRepository>();
 builder.Services.AddScoped<SendFileService, SendFileService>();
 builder.Services.AddScoped<ISection, Section>();
-/*builder.Services.AddScoped<AnalyticsRepository, AnalyticsRepository>();*/
+builder.Services.AddScoped<AnalyticsRepository, AnalyticsRepository>();
+builder.Services.AddScoped<AnalyticsServices, AnalyticsServices>();
 
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddSingleton<ISection, Section>();

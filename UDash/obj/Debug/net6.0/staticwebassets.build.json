@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "jXLV0P4Di5Iv92iUS5BCpCTQMum34V4hPlb0+mPVMhs=",
+  "Hash": "M58KZhXrslTemSOr5oU+d94cNL31Kg+PuD9dwz2K7sw=",
   "Source": "CRM",
   "BasePath": "_content/CRM",
   "Mode": "Default",
@@ -83,6 +83,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "Z:\\Projeto Agenda\\UDash\\wwwroot\\js\\Alerts.js",
+      "SourceId": "CRM",
+      "SourceType": "Discovered",
+      "ContentRoot": "Z:\\Projeto Agenda\\UDash\\wwwroot\\",
+      "BasePath": "_content/CRM",
+      "RelativePath": "js/Alerts.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Alerts.js"
     },
     {
       "Identity": "Z:\\Projeto Agenda\\UDash\\wwwroot\\js\\chart.js",

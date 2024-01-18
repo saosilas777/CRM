@@ -16,12 +16,13 @@ setTimeout(function () {
 $(document).ready(function () {
     const myTable = "#myTable"
     getTable(myTable)
+    SortingDates()
 
     function getTable(id) {
         new DataTable(id, {
             lengthMenu: [
-                [5, 10, 15, -1],
-                [5, 10, 15, 'Todos']
+                [-1, 5, 10, 15, 20],
+                ['Todos', 5, 10, 15, 20]
             ],
 
             language: {
@@ -37,7 +38,9 @@ $(document).ready(function () {
                 }
             },
             columnDefs: [
-                { orderable: false, targets: [3] }
+                { orderable: false, targets: [2] }
+
+
             ]
         });
     }
@@ -45,31 +48,47 @@ $(document).ready(function () {
 
 });
 
-const customer = document.getElementById('Customers')
-const analytics = document.getElementById('Analytics')
-const home = document.getElementById('Home')
-const keyBtn = document.getElementById('keyBtn')
+function SortingDates() {
 
-const url = window.location.pathname
+    let datas = document.querySelectorAll('.lastPurchase')
 
-if (url.includes('Home')) {
-    home.classList.add('bgImageLink')
-}
-if (url.includes('Analytics')) {
-    analytics.classList.add('bgImageLink')
-}
-if (url.includes('Customer')) {
-    customer.classList.add('bgImageLink')
-}
-if (url.includes('ChangePassword')) {
-    keyBtn.classList.add('keyBtnColor')
+    datas.forEach(function (data) {
+
+        let date = data.innerText
+        let _newdate = new Date(date).toLocaleDateString('pt-BR')
+
+        data.innerText = _newdate
+
+    })
 }
 
 
-const insertDataBtn = document.getElementById('insertDataBtn')
-const insert = document.getElementById('insert')
 
-insertDataBtn.addEventListener('click', function () {
-    insert.style.display = "block";
-})
+    const customer = document.getElementById('Customers')
+    const analytics = document.getElementById('Analytics')
+    const home = document.getElementById('Home')
+    const keyBtn = document.getElementById('keyBtn')
+
+    const url = window.location.pathname
+
+    if (url.includes('Home')) {
+        home.classList.add('bgImageLink')
+    }
+    if (url.includes('Analytics')) {
+        analytics.classList.add('bgImageLink')
+    }
+    if (url.includes('Customer')) {
+        customer.classList.add('bgImageLink')
+    }
+    if (url.includes('ChangePassword')) {
+        keyBtn.classList.add('keyBtnColor')
+    }
+
+
+    const insertDataBtn = document.getElementById('insertDataBtn')
+    const insert = document.getElementById('insert')
+
+    insertDataBtn.addEventListener('click', function () {
+        insert.style.display = "block";
+    })
 

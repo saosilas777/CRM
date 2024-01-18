@@ -62,5 +62,16 @@ namespace CRM.Repository
 			_context.Update(login);
 			_context.SaveChanges();
 		}
+
+		public bool PasswordUpdate(string password, string email)
+		{
+			var user = _context.Users.FirstOrDefault(x => x.Email == email);
+			var login = _context.Login.FirstOrDefault(x => x.User == user);
+			login.Password = password;
+
+			_context.Login.Update(login);
+			_context.SaveChanges();
+			return true;
+		}
 	}
 }

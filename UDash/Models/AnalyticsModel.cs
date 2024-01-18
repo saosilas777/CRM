@@ -5,10 +5,10 @@
 		public Guid Id { get; set; }
 		public Guid UserId { get; set; }
 		public DateTime Registration { get; set; }
-		public UserModel User { get; set; }
-		public double TotalPortfolio { get; set; }
-		public int TotalCustomer { get; set; }
-		public double AverageTicket { get; set; }
-		public int Churns { get; set; }
+		public int TotalCustomers { get; set; }
+		public int ActiveCustomers { get; set; }
+		public int InactiveCustomers { get; set; }
+		public double? TotalSalesMonth { get; set; }
+
 	}
 }

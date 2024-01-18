@@ -34,7 +34,7 @@ namespace CRM.Repository
 			
 		}
 
-
+		
 
 		public UserModel BuscarPorEmaileLogin(string login, string email)
 		{

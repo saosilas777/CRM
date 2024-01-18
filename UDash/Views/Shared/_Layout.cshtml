@@ -22,6 +22,7 @@
 <body>
 	<div class="aside">
 		<header class="header_hero">
+					@*<button type="button" class="menuHideBtn"><i class="fa-solid fa-bars" id="menuHideBtn"></i></button>*@
 			<nav class="header_nav">
 				<div class="logo-title">
 					<div class="title">
@@ -34,12 +35,9 @@
 					<span class="horizontal-line"></span>
 					<ul class="header_nav-links">
 						
-						<li class="home"><a id="Home" asp-controller="Home" asp-action="Index">Home</a></li>
-						
-						@*<li class="Analytics"><a id="Analytics" asp-controller="Analytics" asp-action="Index">Analytics</a></li>*@
-						@*<li>Security</li>*@
-						
+						<li class="home"><a id="Home" asp-controller="Home" asp-action="Index">Home</a></li>						
 						<li class="Customers"><a id="Customers" asp-controller="Customer" asp-action="Index">Customers</a></li>
+						<li class="Analytics"><a id="Analytics" asp-controller="Analytics" asp-action="Index">Analytics</a></li>
 					</ul>
 				</div>
 				<ul class="logout-btn">

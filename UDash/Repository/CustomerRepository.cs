@@ -66,7 +66,7 @@ namespace CRM.Repository
 				LastPurchaseValue = custumerDb.LastPurchaseValue,
 				ContactRecordsDate = recordsDate,
 				ContactRecordsAnotation = anotation,
-				NextContactDate = custumerDb.NextContactDate
+				NextContactDate = custumerDb.NextContactDate.ToShortDateString()
 
 			};
 
@@ -76,7 +76,7 @@ namespace CRM.Repository
 
 		public List<_CustomerModel> BuscarTodos(Guid id)
 		{
-			return _context.Customers.OrderBy(x => x.LastPurchaseDate).Include(x => x.Emails).Include(x => x.ContactRecords).Include(x => x.Phones).Where(x => x.UserId == id).ToList();
+			return _context.Customers.Include(x => x.Emails).Include(x => x.ContactRecords).Include(x => x.Phones).Where(x => x.UserId == id).ToList();
 		}
 		public List<_CustomerModel> ListarTodos()
 		{
@@ -160,9 +160,53 @@ namespace CRM.Repository
 			return _customers;
 		}
 
+		public List<_CustomerModel> AtualizarTodos(List<_CustomerModel> customers)
+		{
+			
+			_context.Customers.UpdateRange(customers);
+			_context.SaveChanges();
+			return customers;
+		}
+		
+		public _CustomerModel Atualizar(_CustomerEditViewModel _customer)
+		{
+			var _customerDb = _context.Customers.FirstOrDefault(x => x.Id == _customer.Id);
+			var _phonesDb = _context.Phones.Where(x => x.Customer == _customerDb).ToList();
+			var _emailsDb = _context.Emails.Where(x => x.Customer == _customerDb).ToList();
+
+
+			for (int i = 0; i < _customer.Phones.Length; i++)
+			{
+				_phonesDb[i].Phone = _customer.Phones[i];
+			}
+
+			
+			for (int i = 0; i < _customer.Emails.Length; i++)
+			{
+				_emailsDb[i].Email = _customer.Emails[i];
+			}
+
+			
+			_customerDb.Codigo = _customer.Codigo;
+			_customerDb.Cnpj = _customer.Cnpj;
+			_customerDb.RazaoSocial = _customer.RazaoSocial;
+			_customerDb.Status = _customer.Status;
+			_customerDb.Cidade = _customer.Cidade;
+			_customerDb.Uf = _customer.Uf;
+			_customerDb.Contact = _customer.Contact;
+			_customerDb.LastPurchaseDate = _customer.LastPurchaseDate;
+			_customerDb.LastPurchaseValue = _customer.LastPurchaseValue;
+			_customerDb.NextContactDate = DateTime.Parse(_customer.NextContactDate);
+
+
+			_context.Customers.Update(_customerDb);
+			_context.SaveChanges();
+			return _customerDb;
+		}
 		public List<_CustomerModel> AdicionarTodos(List<_CustomerModel> customers)
 		{
-			_context.AddRange(customers);
+
+			_context.Customers.AddRange(customers);
 			_context.SaveChanges();
 			return customers;
 		}
@@ -172,7 +216,7 @@ namespace CRM.Repository
 			var customer = _context.Customers.FirstOrDefault(x => x.Id == id);
 			return customer;
 		}
-		public bool RegistrationContact(string anotation, Guid id)
+		public bool RegistrationContact(string anotation, string date, Guid id)
 		{
 			var _customer = BuscarCustomerPorId(id);
 			_ContactRecords contacts = new();
@@ -180,22 +224,24 @@ namespace CRM.Repository
 			contacts.Anotation = anotation;
 			contacts.RegistrationDate = DateTime.Now;
 
-			List<_ContactRecords> _contacts = new();
-			_contacts.Add(contacts);
+			_customer.NextContactDate = DateTime.Parse(date);
 
-			_context.ContactRecords.AddRange(_contacts);
+			_context.Customers.Update(_customer);
+			_context.ContactRecords.Add(contacts);
 			_context.SaveChanges();
 
 			return true;
 
 		}
-
-		/*public List<_CustomerModel> BuscarContasIdStarlord(Guid id)
+		public void NextContactRecord(string date, Guid id)
 		{
-			_CustomerModel customerDB = BuscarPorId(id);
-			string idStarlord = customerDB.IdStarford;
-			List<_CustomerModel> customers = ListarTodos().Where(x => x.IdStarford == idStarlord).ToList();
-			return customers;
-		}*/
+			var customer = BuscarCustomerPorId(id);
+			customer.NextContactDate = DateTime.Parse(date);
+
+			_context.Customers.Update(customer);
+			_context.SaveChanges();
+
+
+		}
 	}
 }

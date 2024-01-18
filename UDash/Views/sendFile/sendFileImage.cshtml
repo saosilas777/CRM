@@ -19,6 +19,17 @@
 		</form>
 		
 	</div>
+	@if (TempData["ErrorMessage"] != null)
+	{
+		<div class="alertSendFile">
+			<div id="deleteAlert" class="deleteAlert">
+				<span>
+					<b>@TempData["ErrorMessage"]</b>
+				</span>
+			</div>
+		</div>
+
+	}
 	<div id="apresentar" style="width:300px;height:300px;margin-top:1rem"></div>
 </div>
 <footer class="footer">
@@ -28,3 +39,4 @@
 
 
 <script src="/js/ConvertImageBase64.js"></script>
+<script src="/js/Alerts.js"></script>

@@ -5,9 +5,12 @@
 }
 @if (TempData["ErrorMessage"] != null)
 {
-	<div class="alert alert-danger" role="alert">
-		<button type="button" class="btn btn-danger btn-sm close-alert" arial-lable="Close" hidden>X</button>
-		@TempData["ErrorMessage"]
+	<div class="alertSendFile">
+		<div id="deleteAlert" class="deleteAlert">
+			<span>
+				<b>@TempData["ErrorMessage"]</b>
+			</span>
+		</div>
 	</div>
 
 }
@@ -59,6 +62,7 @@
 		<p>Development by &copy; <span>U.code</span></p>
 	</footer>
 </div>
-<script src="~/js/sign.js"></script>
+<script src="/js/sign.js"></script>
+<script src="/js/Alerts.js"></script>
 
 

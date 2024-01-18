@@ -1,4 +1,4 @@
-﻿/*using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using CRM.Interfaces;
 using CRM.Models;
@@ -10,31 +10,27 @@ namespace CRM.Controllers
 {
 	public class AnalyticsController : Controller
 	{
-		private readonly ISection _section;
 		private readonly AnalyticsRepository _analyticsRepository;
+		private readonly AnalyticsServices _analyticsServices;
 
-		public AnalyticsController(ISection section, AnalyticsRepository analyticsRepository)
+		public AnalyticsController(AnalyticsRepository analyticsRepository,
+									AnalyticsServices analyticsServices)
 		{
-			_section = section;			
 			_analyticsRepository = analyticsRepository;
+			_analyticsServices = analyticsServices;
 		}
 
 		public IActionResult Index()
 		{
-			var analytics = _analyticsRepository.BuscarTodos();
+			var analytics = _analyticsServices.AnalyticsBuilder();
 			return View(analytics);
 		}
 
-		public IActionResult Privacy()
-		{
-			return View();
-		}
-
-		[HttpPost]
-		public IActionResult ReceberDatos(AnalyticsViewModel analytics)
+		/*[HttpPost]
+		public IActionResult ReceberDados(AnalyticsViewModel analytics)
 		{
 			_analyticsRepository.InsertAnalytics(analytics);
 			return RedirectToAction("Index", "Analytics");
-		}
+		}*/
 	}
-}*/
+}

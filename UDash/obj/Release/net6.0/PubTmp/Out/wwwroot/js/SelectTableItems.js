@@ -5,8 +5,6 @@ let trs = tbody.querySelectorAll('tr')
 
 const selection = document.getElementById('selection')
 
-console.log(selection.value)
-
 selection.addEventListener('change', function () {
     removeStyleAttribute()
 

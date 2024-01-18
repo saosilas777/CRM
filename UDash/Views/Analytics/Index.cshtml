@@ -1,56 +1,53 @@
-﻿@model CRM.Models.ViewModels.AnalyticsViewModel
-
+﻿@model AnalyticsModel
 @{
-	double _totalPortfolio = @Model.TotalPortfolio;
-	double _averageTicket = @Model.AverageTicket;
+	double totalSales = double.Parse(Model.TotalSalesMonth.ToString());
+	string _totalSales = totalSales.ToString("C2", new System.Globalization.CultureInfo("pt-BR"));
 
-	string totalPortfolio = _totalPortfolio.ToString("C2", new System.Globalization.CultureInfo("pt-BR"));
-	string averageTicket = _averageTicket.ToString("C2", new System.Globalization.CultureInfo("pt-BR"));
 }
 
 <div class="main">
 	@await Component.InvokeAsync("Header")
 	<section class="content-cards display analytics">
-		<div class="tickets dollar">
-			<span class="ticket_figure"><i class="fa-solid fa-hand-holding-dollar"></i></span>
+		<div class="tickets people ">
+			<span class="ticket_figure"><i class="fa-solid fa-people-group"></i></span>
 			<div class="ticket_header">
-				<p>Carteira Total</p>
+				<p>Total de Clientes</p>
 			</div>
 			<span class="horizontal-line"></span>
 			<div class="ticket_content">
 
 				<p class="margin_right"></p>
-				<p id="TotalPortfolio">@totalPortfolio</p>
-			</div>
-		</div>
-		<div class="tickets people">
-			<span class="ticket_figure"><i class="fa-solid fa-people-group"></i></span>
-			<div class="ticket_header">
-				<p>Clientes Ativos</p>
-			</div>
-			<span class="horizontal-line"></span>
-			<div class="ticket_content">
-				<p>@Model.TotalCustomer</p>
-			</div>
-		</div>
-		<div class="tickets arrow">
-			<span class="ticket_figure"><i class="fa-solid fa-arrow-trend-up"></i></span>
-			<div class="ticket_header">
-				<p>Ticket Médio</p>
-			</div>
-			<span class="horizontal-line"></span>
-			<div class="ticket_content">
-				<p>@averageTicket</p>
+				<p id="TotalPortfolio">@Model.TotalCustomers</p>
 			</div>
 		</div>
 		<div class="tickets handshake">
 			<span class="ticket_figure"><i class="fa-regular fa-handshake"></i></span>
 			<div class="ticket_header">
-				<p>Churns</p>
+				<p>Clientes Ativos</p>
 			</div>
 			<span class="horizontal-line"></span>
 			<div class="ticket_content">
-				<p>@Model.Churns.ToString()</p>
+				<p>@Model.ActiveCustomers</p>
+			</div>
+		</div>
+		<div class="tickets arrow">
+			<span class="ticket_figure"><i class="fa-solid fa-arrow-trend-down"></i></span>
+			<div class="ticket_header">
+				<p>Clientes Inativos</p>
+			</div>
+			<span class="horizontal-line"></span>
+			<div class="ticket_content">
+				<p>@Model.InactiveCustomers</p>
+			</div>
+		</div>
+		<div class="tickets dollar">
+			<span class="ticket_figure"><i class="fa-solid fa-hand-holding-dollar"></i></span>
+			<div class="ticket_header">
+				<p>Venda Mensal Total</p>
+			</div>
+			<span class="horizontal-line"></span>
+			<div class="ticket_content">
+				<p>@_totalSales</p>
 			</div>
 		</div>
 
@@ -58,9 +55,9 @@
 
 	<!-- Graphics -->
 
-	<button class="insertDataBtn" id="insertDataBtn" type="button">Inserir dados</button>
+@*	<button class="insertDataBtn" id="insertDataBtn" type="button">Inserir dados</button>
 	<div id="insert">
-		<form asp-action="ReceberDatos" asp-controller="Analytics" method="post">
+		<form asp-action="ReceberDados" asp-controller="Analytics" method="post">
 			<div class="insertContent">
 				<h4>Reuniões da semana</h4>
 				<div class="divFlexRow">
@@ -88,11 +85,11 @@
 					</div>
 					<div class="spaceBetween"></div>
 					<div class="divFlexColumn">
-						@*<input class="meeting" value="@Model.Meetings.Segunda" asp-for="@Model.Meetings.Segunda" />
+						<input class="meeting" value="@Model.Meetings.Segunda" asp-for="@Model.Meetings.Segunda" />
 						<input class="meeting" value="@Model.Meetings.Terca" asp-for="@Model.Meetings.Terca" />
 						<input class="meeting" value="@Model.Meetings.Quarta" asp-for="@Model.Meetings.Quarta" />
 						<input class="meeting" value="@Model.Meetings.Quinta" asp-for="@Model.Meetings.Quinta" />
-						<input class="meeting" value="@Model.Meetings.Sexta" asp-for="@Model.Meetings.Sexta" />*@
+						<input class="meeting" value="@Model.Meetings.Sexta" asp-for="@Model.Meetings.Sexta" />
 					</div>
 				</div>
 			</div>
@@ -122,7 +119,7 @@
 						<input class="noshows" value="@Model.NoShows.Terca" asp-for="@Model.NoShows.Terca" />
 						<input class="noshows" value="@Model.NoShows.Quarta" asp-for="@Model.NoShows.Quarta" />
 						<input class="noshows" value="@Model.NoShows.Quinta" asp-for="@Model.NoShows.Quinta" />
-						<input class="noshows" value="@Model.NoShows.Sexta" asp-for="@Model.NoShows.Sexta" />*@
+						<input class="noshows" value="@Model.NoShows.Sexta" asp-for="@Model.NoShows.Sexta" />
 					</div>
 				</div>
 			</div>
@@ -137,7 +134,7 @@
 					</div>
 					<div class="spaceBetween"></div>
 					<div class="divFlexColumn">
-						<input type="text" class="churns" value="@Model.Churns" asp-for="@Model.Churns" />
+						<input type="text" class="churns" value=""  />
 					</div>
 				</div>
 			</div>
@@ -147,7 +144,7 @@
 
 
 		</form>
-	</div>
+	</div>*@
 	<section class="content_graphics-cards">
 		<article class="tickets">
 			<div class="content_graphics-content">
