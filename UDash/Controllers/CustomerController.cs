@@ -25,13 +25,29 @@ namespace CRM.Controllers
 
 		public IActionResult Index()
 		{
-			var token = _section.GetUserSection();
-			var user = TokenService.GetDataInToken(token);
-			List<_CustomerModel> customers = _customer.BuscarTodos(user.Id);
+			try
+			{
+				var token = _section.GetUserSection();
+				var validationToken = TokenService.TokenIsValid(token);
+				if (validationToken == true)
+				{
+					var user = TokenService.GetDataInToken(token);
+
+					List<_CustomerModel> customers = _customer.BuscarTodos(user.Id);
 
 
+
+					return View(customers);
+				}
+				return RedirectToAction("Login", "Login");
+
+			}
+			catch (Exception)
+			{
+
+				throw;
+			}
 			
-			return View(customers);
 		}
 
 		public IActionResult Editar(Guid id)

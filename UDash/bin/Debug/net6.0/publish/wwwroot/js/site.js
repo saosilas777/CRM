@@ -72,19 +72,36 @@ $(document).ready(function () {
 
 });
 
-function SortingDates() {
+let today = new Date()
+console.log(today)
+let todayBr = new Date(today).toLocaleDateString('pt-BR')
 
+function SortingDates() {
+    
     let datas = document.querySelectorAll('.lastPurchase')
+    
 
     datas.forEach(function (data) {
 
         let date = data.innerText
         let _newdate = new Date(date).toLocaleDateString('pt-BR')
+        const dateLong = new Date(date)
+        
+        
 
-        data.innerText = _newdate
+        if (today > dateLong ) {
+            data.innerHTML = `<p class="lastPurchaseRed">${_newdate}</p>`
+            console.log("datelong ", dateLong, "today", today)
+        }
+        else {
+            data.innerHTML = `<p class="lastPurchase">${_newdate}</p>`
+        }
 
     })
+
+
 }
+
 
 /*menuHideBtn.addEventListener('click', function () {
     const main = document.querySelector('.main')

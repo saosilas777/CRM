@@ -21,6 +21,7 @@ html, body {
 body {
     display: block;
     margin: 0;
+
     background-color: #313131;
     font-family: 'Open Sans', sans-serif;
 }
@@ -1358,6 +1359,19 @@ p.newField {
     .addCustomerBtn a {
         color: #424b70;
     }
+.lastPurchase {
+    padding: .5rem;
+}
+.lastPurchaseRed {
+    width: fit-content;
+    margin: 0;
+    color: red;
+    background-color: #fff393;
+    padding: .5rem;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-weight:bold;
+}
 
 /*////////////////////////////////////////////////////////////////////////////////////////////*/
 /*SendFile*/
@@ -1388,7 +1402,7 @@ p.newField {
     cursor: pointer;
 }
 
-.envio-arquivos .input-file-btn {
+.envio-arquivos .input-file-btn, .cut-file-btn {
     background-color: green;
     color: white;
     padding: .5rem 1rem;
@@ -1397,7 +1411,10 @@ p.newField {
     border: none;
     cursor: pointer;
 }
-
+.cut-file-btn {
+    background-color: #e6a94d;
+    color:black;
+}
 /*ChangePWD*/
 .form_container {
     position: relative;
@@ -1535,4 +1552,8 @@ p.newField {
     display:flex;
     justify-content:center;
     align-items:center;
+}
+.sendImgForm{
+    display:flex;
+    flex-direction:column;
 }

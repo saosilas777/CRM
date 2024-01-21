@@ -24,7 +24,7 @@ namespace CRM.Services
 					new Claim(ClaimTypes.Role, user.Perfil.ToString()),
 				}),
 
-				Expires = DateTime.UtcNow.AddDays(1),
+				Expires = DateTime.UtcNow.AddHours(2),
 				SigningCredentials = new SigningCredentials(
 					new SymmetricSecurityKey(key),
 				SecurityAlgorithms.HmacSha256Signature)
@@ -42,7 +42,7 @@ namespace CRM.Services
 		}
 		public static bool TokenIsValid(string token)
 		{
-			var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("065c14e0c2a0e35c4f7a1d86a12837674fba8ba1"));
+			var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SettingsToken.Secret));
 
 			var handler = new JwtSecurityTokenHandler();
 
@@ -54,8 +54,7 @@ namespace CRM.Services
 					ValidateIssuer = false,
 					ValidateAudience = false,
 					ValidateLifetime = true,
-					IssuerSigningKey = key,
-					ClockSkew = TimeSpan.Zero
+					IssuerSigningKey = key
 				};
 
 				SecurityToken validateToken;
