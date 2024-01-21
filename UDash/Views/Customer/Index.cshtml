@@ -37,7 +37,15 @@
 		<!-- <table id="myTable2" class="table_Securytis"> -->
 		<div class="card">
 			<div class="card_header">
-				<div class="table_float">Clientes</div>
+				<div class="table_float">
+					Clientes
+					<form class="table_float-dates" asp-action="FindCustomerByDate" asp-controller="Customer" method="post">
+						<span>Buscar proximos contatos entre:</span>
+						<input type="date" id="initialDate" name="initialDate"/>
+						<input type="date" id="finalDate" name="finalDate" />
+						<button id="dataFindBtn" class="dataFindBtn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+					</form>
+				</div>
 			</div>
 			<div class="card_body">
 
@@ -219,6 +227,7 @@
 			</div>
 		</div>
 	</section>
+
 </div>
 <footer class="footer">
 	<p> &copy; <a href="#">U.Code</a> development</p>

@@ -5,6 +5,7 @@ using CRM.Models;
 using CRM.Models.ViewModels;
 using CRM.Repository;
 using CRM.Services;
+using OfficeOpenXml.FormulaParsing.LexicalAnalysis;
 
 namespace CRM.Controllers
 {
@@ -49,7 +50,31 @@ namespace CRM.Controllers
 			}
 			
 		}
+		[HttpPost]
+		public IActionResult FindCustomerByDate(string initialDate, string finalDate)
+		{
+			try
+			{
+				var token = _section.GetUserSection();
+				var user = TokenService.GetDataInToken(token);
+				if (initialDate != null && finalDate != null)
+				{
+					
+					var customers = _customer.BuscarTodos(user.Id).Where(x => x.NextContactDate >= DateTime.Parse(initialDate) && x.NextContactDate <= DateTime.Parse(finalDate)).ToList();
+					return View("Index", customers);
+				}
+				else
+				{
+					return RedirectToAction("Index", "Customer");
+				}
 
+			}
+			catch (Exception)
+			{
+
+				throw;
+			}
+		}
 		public IActionResult Editar(Guid id)
 		{
 			_CustomerEditViewModel customerDb = _customer.BuscarPorId(id);
