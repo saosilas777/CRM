@@ -22,19 +22,22 @@ namespace CRM.Services
 
 			DateTime date = DateTime.Now;
 			
-			var month = date.Month;
+			
 
 			List<_CustomerModel> customer = _context.Customers.Where(x => x.UserId == user.Id).ToList();
 
-			double? count = 0;
+			double total = 0;
 			int active = 0;
 			int inactive = 0;
+			
+			
 			foreach (var item in customer)
 			{
-				if(item.LastPurchaseDate.Month == month)
+				if(item.LastPurchaseDate.Month == date.Month && item.LastPurchaseDate.Year == date.Year)
 				{
-					count += item.LastPurchaseValue;
+				 total += item.LastPurchaseValue.Value;
 				}
+				
 				if(item.Status == true)
 				{
 					active++;
@@ -48,7 +51,7 @@ namespace CRM.Services
 
 			AnalyticsModel analytics = new();
 
-			analytics.TotalSalesMonth = count;
+			analytics.TotalSalesMonth = total;
 			analytics.TotalCustomers = customer.Count();
 			analytics.ActiveCustomers = active;
 			analytics.InactiveCustomers = inactive;

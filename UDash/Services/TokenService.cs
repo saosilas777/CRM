@@ -23,11 +23,13 @@ namespace CRM.Services
 					new Claim(ClaimTypes.Email, user.Email.ToString()),
 					new Claim(ClaimTypes.Role, user.Perfil.ToString()),
 				}),
-
+								
 				Expires = DateTime.UtcNow.AddHours(2),
 				SigningCredentials = new SigningCredentials(
 					new SymmetricSecurityKey(key),
-				SecurityAlgorithms.HmacSha256Signature)
+					
+				SecurityAlgorithms.HmacSha256Signature),
+
 			};
 
 			var token = tokenHandler.CreateToken(tokenDescriptor);
@@ -36,7 +38,7 @@ namespace CRM.Services
 		}
 		public static string Authenticate(UserModel user)
 		{
-			var token = TokenService.GenerateToken(user);
+			var token = GenerateToken(user);
 			
 			return token;
 		}
@@ -53,20 +55,22 @@ namespace CRM.Services
 					ValidateIssuerSigningKey = true,
 					ValidateIssuer = false,
 					ValidateAudience = false,
-					ValidateLifetime = true,
-					IssuerSigningKey = key
+					ValidateLifetime = false,
+					IssuerSigningKey = key,
+					ClockSkew = TimeSpan.MaxValue
 				};
 
 				SecurityToken validateToken;
 
 				handler.ValidateToken(token, tokenValid, out validateToken);
+				return true;
 			}
 			catch
 			{
 				return false;
 			}
 
-			return true;
+			
 		}
 
 		public static UserModel GetDataInToken(string token)

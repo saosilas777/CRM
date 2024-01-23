@@ -10,18 +10,20 @@ namespace CRM.Controllers
 {
 	public class SendFileController : Controller
 	{
-		private readonly SendFileService _sendFileServices;
+		private readonly SendFileService _sendFileService;
 		private readonly SendFileImageRepository _sendFileImageRepository;
 
 
 		private readonly ISection _section;
 		private readonly ICustomerRepository _customerRepository;
 
-		public SendFileController(ISection section, SendFileService sendFileServices, ICustomerRepository customerRepository,SendFileImageRepository sendFileImage)
+
+		public SendFileController(ISection section, SendFileService sendFileService, 
+								  ICustomerRepository customerRepository,
+								  SendFileImageRepository sendFileImage)
 		{
-			
 			_section = section;
-			_sendFileServices = sendFileServices;
+			_sendFileService = sendFileService;
 			_customerRepository = customerRepository;
 			_sendFileImageRepository = sendFileImage;
 		}
@@ -37,9 +39,11 @@ namespace CRM.Controllers
 					string extension = Path.GetExtension(uploadFile.FileName);
 					if (extension == ".xlsx")
 					{
-						List<_CustomerModel> customers = _sendFileServices.ReadXls(uploadFile);
-						List<_CustomerModel> newList = VerifyDuplicate(customers);
-						_customerRepository.AtualizarTodos(newList);
+						List<_CustomerModel> customers = _sendFileService.ReadXls(uploadFile);
+						
+						List<_CustomerModel> newList = _sendFileService.VerifyDuplicate(customers);
+
+						
 						return RedirectToAction("Index", "Customer");
 					}
 
@@ -93,58 +97,7 @@ namespace CRM.Controllers
 			return RedirectToAction("Index", "Home");
 		}
 
-		public List<_CustomerModel> VerifyDuplicate(List<_CustomerModel> customer)
-		{
-			var token = _section.GetUserSection();
-			var user = TokenService.GetDataInToken(token);
-			List<_CustomerModel> customerDb = _customerRepository.BuscarTodos(user.Id);
-
-			var month = DateTime.Now.Month;
-
-			
-			for (int i = 0; i < customerDb.Count; i++)
-			{
-				for (int j = 0; j < customer.Count; j++)
-				{
-					if (customer[j].Cnpj == customerDb[i].Cnpj)
-					{
-						customerDb[i].LastPurchaseValue = customer[j].LastPurchaseValue;
-						customerDb[i].LastPurchaseDate = customer[j].LastPurchaseDate;
-						if(customer[j].LastPurchaseDate.Month == month)
-						{
-							customerDb[i].Status = true;
-						}
-											
-					}
-					
-				}
-
-			}
-
-			if(customerDb.Count() < customer.Count())
-			{
-				List<_CustomerModel> newCustomers = new();
-
-				int TotalNewCustomers = customer.Count() - customerDb.Count();
-				int total = customerDb.Count() + TotalNewCustomers;
-
-				for (int i = 1; i <= TotalNewCustomers; i++)
-				{
-
-					newCustomers.Add(customer[total - i]);
-				}
-				_customerRepository.AdicionarTodos(newCustomers);
-			}
-
-			return customerDb;
-		}
-		public MemoryStream ReadStrem(IFormFile file)
-		{
-			using var stream = new MemoryStream();
-
-			file?.CopyTo(stream);
-			var byteArray = stream.ToArray();
-			return new MemoryStream(byteArray);
-		}
+		
+		
 	}
 }

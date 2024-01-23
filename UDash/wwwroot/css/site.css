@@ -1581,3 +1581,36 @@ p.newField {
     display:flex;
     flex-direction:column;
 }
+.maxWidth {
+    max-width: 12rem;
+}
+@media screen and (max-width:90.100rem) {
+    .aside {
+        max-width: 9.525rem;
+    }
+    .header_nav .title {
+        font-size: .9rem
+    }
+    .header_nav span {
+        font-size: 1.6rem
+    }
+    .header_nav-links li a {
+        font-size: .9rem;
+    }
+    .header_nav-links li a {
+        padding: .8rem 1rem;
+    }
+    .logout-btn li{
+        padding:0.3rem .9rem;
+        font-size:1rem;
+    }
+    .main {
+        margin-left: 9.925rem
+    }
+    #myTable th {
+        font-size:.7rem;
+    }
+    #myTable td, #myTable td .lastPurchase, .lastPurchaseRed {
+        font-size: .7rem;
+    }
+}

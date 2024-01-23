@@ -10,27 +10,36 @@ namespace CRM.Controllers
 {
 	public class AnalyticsController : Controller
 	{
-		private readonly AnalyticsRepository _analyticsRepository;
 		private readonly AnalyticsServices _analyticsServices;
-
-		public AnalyticsController(AnalyticsRepository analyticsRepository,
-									AnalyticsServices analyticsServices)
+		private readonly ISection _section;
+		
+		public AnalyticsController(AnalyticsServices analyticsServices, ISection section)
 		{
-			_analyticsRepository = analyticsRepository;
 			_analyticsServices = analyticsServices;
+			_section = section;
 		}
 
 		public IActionResult Index()
 		{
-			var analytics = _analyticsServices.AnalyticsBuilder();
-			return View(analytics);
+			try
+			{
+				var token = _section.GetUserSection();
+				if (TokenService.TokenIsValid(token))
+				{
+					token = _section.GetUserSection();
+					TokenService.TokenIsValid(token);
+					var analytics = _analyticsServices.AnalyticsBuilder();
+					return View(analytics);
+				}
+				return RedirectToAction("Login", "Login");
+			}
+			catch (Exception e)
+			{
+
+				throw new Exception(e.Message);
+			}
+			
 		}
 
-		/*[HttpPost]
-		public IActionResult ReceberDados(AnalyticsViewModel analytics)
-		{
-			_analyticsRepository.InsertAnalytics(analytics);
-			return RedirectToAction("Index", "Analytics");
-		}*/
 	}
 }

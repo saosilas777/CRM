@@ -98,7 +98,7 @@ namespace CRM.Controllers
 					{
 						var authenticated = TokenService.Authenticate(loginDb.User);
 						_section.UserSectionCreate(authenticated);
-						UserModel user = TokenService.GetDataInToken(authenticated);
+/*						UserModel user = TokenService.GetDataInToken(authenticated);*/
 						if(authenticated != null)
 						{
 							return RedirectToAction("Index", "Home");

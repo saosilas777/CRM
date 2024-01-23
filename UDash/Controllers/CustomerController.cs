@@ -43,13 +43,28 @@ namespace CRM.Controllers
 				return RedirectToAction("Login", "Login");
 
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
 
-				throw;
+				throw new Exception(e.Message);
 			}
 			
 		}
+		
+		public IActionResult Editar(Guid id)
+		{
+			_CustomerEditViewModel customerDb = _customer.BuscarPorId(id);
+		
+
+			return View(customerDb);
+		}
+
+		public IActionResult Create()
+		{
+			
+			return View();
+		}
+
 		[HttpPost]
 		public IActionResult FindCustomerByDate(string initialDate, string finalDate)
 		{
@@ -59,7 +74,7 @@ namespace CRM.Controllers
 				var user = TokenService.GetDataInToken(token);
 				if (initialDate != null && finalDate != null)
 				{
-					
+
 					var customers = _customer.BuscarTodos(user.Id).Where(x => x.NextContactDate >= DateTime.Parse(initialDate) && x.NextContactDate <= DateTime.Parse(finalDate)).ToList();
 					return View("Index", customers);
 				}
@@ -74,19 +89,6 @@ namespace CRM.Controllers
 
 				throw;
 			}
-		}
-		public IActionResult Editar(Guid id)
-		{
-			_CustomerEditViewModel customerDb = _customer.BuscarPorId(id);
-		
-
-			return View(customerDb);
-		}
-
-		public IActionResult Create()
-		{
-			
-			return View();
 		}
 
 		[HttpPost]

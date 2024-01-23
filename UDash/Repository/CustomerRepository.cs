@@ -162,7 +162,6 @@ namespace CRM.Repository
 
 		public List<_CustomerModel> AtualizarTodos(List<_CustomerModel> customers)
 		{
-			
 			_context.Customers.UpdateRange(customers);
 			_context.SaveChanges();
 			return customers;

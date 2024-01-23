@@ -26,14 +26,13 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ILoginRepository, LoginRepository>();
 builder.Services.AddScoped<ISendEmail, SendEmail>();
+builder.Services.AddScoped<ISection, Section>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<SendFileImageRepository, SendFileImageRepository>();
 builder.Services.AddScoped<SendFileService, SendFileService>();
-builder.Services.AddScoped<ISection, Section>();
 builder.Services.AddScoped<AnalyticsRepository, AnalyticsRepository>();
 builder.Services.AddScoped<AnalyticsServices, AnalyticsServices>();
 
-builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
-builder.Services.AddSingleton<ISection, Section>();
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
@@ -55,7 +54,8 @@ builder.Services.AddAuthentication(x =>
 		IssuerSigningKey = new SymmetricSecurityKey(key),
 		ValidateIssuer = false,
 		ValidateAudience = false,
-		ValidateLifetime = true
+		ValidateLifetime = false,
+		ClockSkew = TimeSpan.MaxValue
 
 	};
 });

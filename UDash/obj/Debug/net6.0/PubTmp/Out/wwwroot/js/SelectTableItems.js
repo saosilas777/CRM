@@ -3,11 +3,11 @@
 }, 200)
 
 function clickChange() {
-    const ultimoContato = document.getElementById('ultimoContato')
+    const ultimoContato = document.getElementById('proximoContato')
     ultimoContato.click()
-    setTimeout(function () {
+   /* setTimeout(function () {
         ultimoContato.click()
-    }, 400)
+    }, 400)*/
 }
 const tbody = document.getElementById('tbody')
 let trs = tbody.querySelectorAll('tr')

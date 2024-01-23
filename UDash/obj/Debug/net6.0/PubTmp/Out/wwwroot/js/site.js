@@ -39,7 +39,9 @@ insertDataBtn.addEventListener('click', function () {
 const menuHideBtn = document.getElementById('menuHideBtn')
 $(document).ready(function () {
     const myTable = "#myTable"
+    const myTable2 = "#myTable2"
     getTable(myTable)
+    getTable(myTable2)
     SortingDates()
 
     function getTable(id) {

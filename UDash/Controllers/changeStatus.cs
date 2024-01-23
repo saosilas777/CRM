@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/*using Microsoft.AspNetCore.Mvc;
 using CRM.Models;
 
 namespace CRM.Controllers
@@ -12,3 +12,4 @@ namespace CRM.Controllers
 		}
 	}
 }
+*/

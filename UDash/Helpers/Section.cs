@@ -15,7 +15,7 @@ namespace CRM.Helpers
 		{
 			try
 			{
-				string? userSection = _httpContext.HttpContext.Session.GetString("Token");
+				string userSection = _httpContext.HttpContext.Session.GetString("Token");
 				if (string.IsNullOrEmpty(userSection)) return null;
 				return userSection;
 			}
