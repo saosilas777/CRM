@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "Z:\\Projeto Agenda\\UDash\\CRM.csproj": {}
+    "Z:\\CRM\\UDash\\CRM.csproj": {}
   },
   "projects": {
-    "Z:\\Projeto Agenda\\UDash\\CRM.csproj": {
+    "Z:\\CRM\\UDash\\CRM.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "Z:\\Projeto Agenda\\UDash\\CRM.csproj",
+        "projectUniqueName": "Z:\\CRM\\UDash\\CRM.csproj",
         "projectName": "CRM",
-        "projectPath": "Z:\\Projeto Agenda\\UDash\\CRM.csproj",
+        "projectPath": "Z:\\CRM\\UDash\\CRM.csproj",
         "packagesPath": "C:\\Users\\saosi\\.nuget\\packages\\",
-        "outputPath": "Z:\\Projeto Agenda\\UDash\\obj\\",
+        "outputPath": "Z:\\CRM\\UDash\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

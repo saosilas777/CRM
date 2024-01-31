@@ -12,11 +12,13 @@ namespace CRM.Controllers
 	{
 		private readonly AnalyticsServices _analyticsServices;
 		private readonly ISection _section;
-		
-		public AnalyticsController(AnalyticsServices analyticsServices, ISection section)
+		private readonly ICustomerRepository _customer;
+
+		public AnalyticsController(AnalyticsServices analyticsServices, ISection section, ICustomerRepository customer)
 		{
 			_analyticsServices = analyticsServices;
 			_section = section;
+			_customer = customer;
 		}
 
 		public IActionResult Index()
@@ -24,21 +26,26 @@ namespace CRM.Controllers
 			try
 			{
 				var token = _section.GetUserSection();
-				if (TokenService.TokenIsValid(token))
+				var tokenRegister = TokenService.TokenIsValid(token);
+				_customer.TokenValidationRegister(tokenRegister);
+				if (tokenRegister.IsValid == true)
 				{
-					token = _section.GetUserSection();
-					TokenService.TokenIsValid(token);
 					var analytics = _analyticsServices.AnalyticsBuilder();
 					return View(analytics);
 				}
-				return RedirectToAction("Login", "Login");
+				else
+				{
+					_section.UserSectionRemove();
+					return RedirectToAction("Login", "Login");
+				}
+
 			}
 			catch (Exception e)
 			{
 
 				throw new Exception(e.Message);
 			}
-			
+
 		}
 
 	}

@@ -5,7 +5,7 @@ namespace CRM.Interfaces
 {
 	public interface ICustomerRepository
 	{
-		bool Create(_CustomerModel customer);
+		bool Create(_CustomerCreateViewModel customer);
 		_CustomerEditViewModel BuscarPorId(Guid id);
 		List<_CustomerModel> BuscarTodos(Guid id);
 		/*bool Editar(_CustomerModel customer);*/
@@ -15,6 +15,7 @@ namespace CRM.Interfaces
 		List<_CustomerModel> AtualizarTodos(List<_CustomerModel> customers);
 
 		bool RegistrationContact(string anotation,string date, Guid id);
+		void TokenValidationRegister(testeTokenValid token);
 
 
 

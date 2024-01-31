@@ -83,13 +83,53 @@ namespace CRM.Repository
 			return _context.Customers.ToList();
 		}
 
-		public bool Create(_CustomerModel customer)
+		public bool Create(_CustomerCreateViewModel customer)
 		{
 			string token = _section.GetUserSection();
 			UserModel user = TokenService.GetDataInToken(token);
+			List<_EmailModel> emails = new();
+			_EmailModel email = new();
+			List<_PhoneModel> phones = new();
+			_PhoneModel phone = new();
 
-			customer.UserId = user.Id;
-			_context.Add(customer);
+
+
+			_CustomerModel customerModel = new()
+			{
+				UserId = user.Id,
+				Codigo = customer.Codigo,
+				Cnpj = customer.Cnpj,
+				RazaoSocial = customer.RazaoSocial,
+				Contact = customer.Contato,
+				Cidade = customer.Cidade,
+				Uf = customer.Uf,
+				LastPurchaseDate = DateTime.Parse("1999/01/01"),
+				LastPurchaseValue = 0
+				
+
+			};
+			foreach (var item in customer.Emails)
+			{
+				email.Email = item;
+				email.Customer = customerModel;
+				email.RegistrationDate = DateTime.Now;
+				emails.Add(email);
+
+			}
+			foreach (var item in customer.Phones)
+			{
+				phone.Phone = item;
+				phone.Customer = customerModel;
+				phone.RegistrationDate = DateTime.Now;
+				phones.Add(phone);
+
+			}
+			customerModel.Emails = emails;
+			customerModel.Phones = phones;
+
+
+
+			_context.Add(customerModel);
 			_context.SaveChanges();
 			return true;
 		}
@@ -240,6 +280,13 @@ namespace CRM.Repository
 			_context.Customers.Update(customer);
 			_context.SaveChanges();
 
+
+		}
+
+		public void TokenValidationRegister(testeTokenValid token)
+		{
+			_context.Add(token);
+			_context.SaveChanges();
 
 		}
 	}

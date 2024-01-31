@@ -28,45 +28,76 @@
 				</p>
 				<input id="razaoSocial" type="text" asp-for="RazaoSocial" />
 			</label>
+			<label for="contato" class="span3 ">
+				<p class="bgWhite">
+					Contato
+				</p>
+				<input id="contato" type="text" asp-for="Contato" />
+			</label>
 			<label for="cidade" class="span3 ">
 				<p class="bgWhite">
 					Cidade
 				</p>
 				<input id="cidade" type="text" asp-for="Cidade" />
 			</label>
-			<label for="uf" class="select span6">
+			<label for="uf" class="select span3">
 				<p>
 					UF
 				</p>
 				<select id="uf" asp-for="Uf">
-					<option value="SP">SP</option>
-					<option value="RJ">RJ</option>
-					<option value="MG">MG</option>
+					<option value="RO">RO</option>
+					<option value="AC">AC</option>
+					<option value="AM">AM</option>
+					<option value="RR">RR</option>
+					<option value="PA">PA</option>
+					<option value="AP">AP</option>
+					<option value="TO">TO</option>
+					<option value="MA">MA</option>
+					<option value="PI">PI</option>
+					<option value="CE">CE</option>
+					<option value="RN">RN</option>
+					<option value="PB">PB</option>
+					<option value="PE">PE</option>
+					<option value="AL">AL</option>
+					<option value="SE">SE</option>
 					<option value="BA">BA</option>
+					<option value="MG">MG</option>
+					<option value="ES">ES</option>
+					<option value="RJ">RJ</option>
+					<option value="SP" selected>SP</option>
+					<option value="PR">PR</option>
+					<option value="SC">SC</option>
+					<option value="RS">RS</option>
+					<option value="MS">MS</option>
+					<option value="MT">MT</option>
+					<option value="GO">GO</option>
+					<option value="DF">DF</option>
+
 				</select>
 			</label>
 			<div id="email" class="span3">
-			<label for="email" class="span3">
-				<p>
+				<label for="email" class="span3">
+					<p>
 						<a id="InsertEmailField" class="InsertField">
 							Email
 							<i class="fa-solid fa-plus"></i>
 						</a>
-				</p>
-				<input id="email" type="email" asp-for="Emails" name="Emails"/>
-			</label>
+					</p>
+					<input id="email" type="email" asp-for="Emails" name="Emails" />
+				</label>
 			</div>
 
 			<div id="phone" class="span3">
-			<label for="phone" class="span3">
-				<p>
+				<label for="phone" class="span3">
+					<p>
 						<a id="InsertPhoneField" class="InsertField">
 							Telefone
-						<i class="fa-solid fa-plus"></i></a>
-				</p>
-					<input id="phone" type="text" asp-for="Phones" name="Phones" value=""/>
-			</label>
-			
+							<i class="fa-solid fa-plus"></i>
+						</a>
+					</p>
+					<input id="phone" type="text" asp-for="Phones" name="Phones" value="" />
+				</label>
+
 			</div>
 
 			<div class="formCreateCustomer_buttons span6">

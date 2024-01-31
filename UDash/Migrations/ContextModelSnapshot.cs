@@ -40,7 +40,7 @@ namespace CRM.Migrations
                     b.Property<int>("TotalCustomers")
                         .HasColumnType("int");
 
-                    b.Property<double>("TotalSalesMonth")
+                    b.Property<double?>("TotalSalesMonth")
                         .HasColumnType("float");
 
                     b.Property<Guid>("UserId")
@@ -237,6 +237,29 @@ namespace CRM.Migrations
                     b.HasIndex("CustomerId");
 
                     b.ToTable("Phones");
+                });
+
+            modelBuilder.Entity("CRM.Models.testeTokenValid", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsValid")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TesteTokenValid");
                 });
 
             modelBuilder.Entity("CRM.Models.LoginModel", b =>

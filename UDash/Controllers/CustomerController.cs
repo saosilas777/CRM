@@ -30,17 +30,20 @@ namespace CRM.Controllers
 			{
 				var token = _section.GetUserSection();
 				var validationToken = TokenService.TokenIsValid(token);
-				if (validationToken == true)
+				_customer.TokenValidationRegister(validationToken);
+				if (validationToken.IsValid == true)
 				{
 					var user = TokenService.GetDataInToken(token);
-
 					List<_CustomerModel> customers = _customer.BuscarTodos(user.Id);
-
-
 
 					return View(customers);
 				}
-				return RedirectToAction("Login", "Login");
+				else
+				{
+					_section.UserSectionRemove();
+					return RedirectToAction("Login", "Login");
+				}
+				
 
 			}
 			catch (Exception e)
@@ -94,7 +97,7 @@ namespace CRM.Controllers
 		[HttpPost]
 		public IActionResult Create(_CustomerCreateViewModel customer)
 		{
-
+			_customer.Create(customer);
 			return View();
 		}
 

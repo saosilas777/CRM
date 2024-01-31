@@ -18,7 +18,7 @@ namespace CRM.ViewComponents
 		{
 			try
 			{
-				string? UserSection = HttpContext.Session.GetString("Token");
+				string UserSection = HttpContext.Session.GetString("Token");
 
 				if (string.IsNullOrEmpty(UserSection))
 				{

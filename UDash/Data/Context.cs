@@ -17,6 +17,7 @@ namespace CRM.Data
 		public DbSet<Models._ContactRecords> ContactRecords { get; set; }
 		public DbSet<SendFileImageModel> ImageUrl { get; set; }
 		public DbSet<AnalyticsModel> Analytics { get; set; }
+		public DbSet<testeTokenValid> TesteTokenValid { get; set; }
 
 
 

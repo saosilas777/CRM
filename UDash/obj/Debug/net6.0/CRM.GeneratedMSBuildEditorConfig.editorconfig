@@ -8,77 +8,77 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = CRM
 build_property.RootNamespace = CRM
-build_property.ProjectDir = Z:\Projeto Agenda\UDash\
+build_property.ProjectDir = Z:\CRM\UDash\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = Z:\Projeto Agenda\UDash
+build_property.MSBuildProjectDirectory = Z:\CRM\UDash
 build_property._RazorSourceGeneratorDebug = 
 
-[Z:/Projeto Agenda/UDash/Views/Analytics/Index.cshtml]
+[Z:/CRM/UDash/Views/Analytics/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW5hbHl0aWNzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[Z:/Projeto Agenda/UDash/Views/Customer/Create.cshtml]
+[Z:/CRM/UDash/Views/Customer/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[Z:/Projeto Agenda/UDash/Views/Customer/Editar.cshtml]
+[Z:/CRM/UDash/Views/Customer/Editar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcRWRpdGFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[Z:/Projeto Agenda/UDash/Views/Customer/Index.cshtml]
+[Z:/CRM/UDash/Views/Customer/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[Z:/Projeto Agenda/UDash/Views/Home/Index.cshtml]
+[Z:/CRM/UDash/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[Z:/Projeto Agenda/UDash/Views/Login/ForgotPassword.cshtml]
+[Z:/CRM/UDash/Views/Login/ForgotPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cRm9yZ290UGFzc3dvcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[Z:/Projeto Agenda/UDash/Views/Login/Login.cshtml]
+[Z:/CRM/UDash/Views/Login/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cTG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[Z:/Projeto Agenda/UDash/Views/Login/SignUp.cshtml]
+[Z:/CRM/UDash/Views/Login/SignUp.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cU2lnblVwLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[Z:/Projeto Agenda/UDash/Views/sendFile/sendFileImage.cshtml]
+[Z:/CRM/UDash/Views/sendFile/sendFileImage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3Ncc2VuZEZpbGVcc2VuZEZpbGVJbWFnZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[Z:/Projeto Agenda/UDash/Views/Shared/Components/Header/Default.cshtml]
+[Z:/CRM/UDash/Views/Shared/Components/Header/Default.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcSGVhZGVyXERlZmF1bHQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[Z:/Projeto Agenda/UDash/Views/Shared/Error.cshtml]
+[Z:/CRM/UDash/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[Z:/Projeto Agenda/UDash/Views/Shared/_ValidationScriptsPartial.cshtml]
+[Z:/CRM/UDash/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[Z:/Projeto Agenda/UDash/Views/User/ChangePassword.cshtml]
+[Z:/CRM/UDash/Views/User/ChangePassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxDaGFuZ2VQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[Z:/Projeto Agenda/UDash/Views/_ViewImports.cshtml]
+[Z:/CRM/UDash/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[Z:/Projeto Agenda/UDash/Views/_ViewStart.cshtml]
+[Z:/CRM/UDash/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[Z:/Projeto Agenda/UDash/Views/Shared/_Layout.cshtml]
+[Z:/CRM/UDash/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-dwxmuyclez
 
-[Z:/Projeto Agenda/UDash/Views/Shared/_LayoutOffLine.cshtml]
+[Z:/CRM/UDash/Views/Shared/_LayoutOffLine.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRPZmZMaW5lLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = b-v6eljdxhih

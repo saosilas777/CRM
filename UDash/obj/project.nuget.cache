@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2F73xugtUHn16+UkPNoNjhTyvKgnJ7wrqnTaVMLjSDiLoYa7ENR20Fl+97uq6a7O1moqR3Il6uNktRgQo/mSFw==",
+  "dgSpecHash": "LhpDYIc0pRZi9IET+EU04Int1sShJmrw0kZEVn/LZ2uNxW4VANrxpQrOadWKPRyXAtm+2BbywwJ/0cbC97CdRA==",
   "success": true,
-  "projectFilePath": "Z:\\Projeto Agenda\\UDash\\CRM.csproj",
+  "projectFilePath": "Z:\\CRM\\UDash\\CRM.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\saosi\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\saosi\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
