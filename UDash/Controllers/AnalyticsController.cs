@@ -5,19 +5,20 @@ using CRM.Models;
 using CRM.Models.ViewModels;
 using CRM.Repository;
 using CRM.Services;
+using Newtonsoft.Json;
 
 namespace CRM.Controllers
 {
 	public class AnalyticsController : Controller
 	{
 		private readonly AnalyticsServices _analyticsServices;
-		private readonly ISection _section;
+		private readonly Interfaces.IUserSession _session;
 		private readonly ICustomerRepository _customer;
 
-		public AnalyticsController(AnalyticsServices analyticsServices, ISection section, ICustomerRepository customer)
+		public AnalyticsController(AnalyticsServices analyticsServices, Interfaces.IUserSession section, ICustomerRepository customer)
 		{
 			_analyticsServices = analyticsServices;
-			_section = section;
+			_session = section;
 			_customer = customer;
 		}
 
@@ -25,19 +26,19 @@ namespace CRM.Controllers
 		{
 			try
 			{
-				var token = _section.GetUserSection();
-				var tokenRegister = TokenService.TokenIsValid(token);
-				_customer.TokenValidationRegister(tokenRegister);
-				if (tokenRegister.IsValid == true)
+				var user = _session.GetUserSection();
+				
+				if (user != null)
 				{
 					var analytics = _analyticsServices.AnalyticsBuilder();
 					return View(analytics);
 				}
-				else
+				return RedirectToAction("NonUserPage", "User");
+				/*else
 				{
-					_section.UserSectionRemove();
+					_session.UserSectionRemove();
 					return RedirectToAction("Login", "Login");
-				}
+				}*/
 
 			}
 			catch (Exception e)

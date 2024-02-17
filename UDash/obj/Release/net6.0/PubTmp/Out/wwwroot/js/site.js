@@ -1,21 +1,47 @@
 ﻿let alerta = document.querySelector('.alert');
+/*
+setTimeout(function () {
+    alerta.style.transform = 'translateY(-10rem)';
+}, 3000)*/
 
-() => {
-    setTimeout(function () {
-        alerta.style.transform = 'translateY(-10rem)';
-    }, 3000)
-}
 
 let _alert = document.getElementById('alert');
 
-setTimeout(function () {
-    _alert.style.opacity = '0'
-}, 3000)
+
+const customer = document.getElementById('Customers')
+const analytics = document.getElementById('Analytics')
+const home = document.getElementById('Home')
+const keyBtn = document.getElementById('keyBtn')
+
+const url = window.location.pathname
+
+if (url.includes('Home')) {
+    home.classList.add('bgImageLink')
+}
+if (url.includes('Analytics')) {
+    analytics.classList.add('bgImageLink')
+}
+if (url.includes('Customer')) {
+    customer.classList.add('bgImageLink')
+}
+if (url.includes('ChangePassword')) {
+    keyBtn.classList.add('keyBtnColor')
+}
 
 
+/*const insertDataBtn = document.getElementById('insertDataBtn')
+const insert = document.getElementById('insert')
+
+insertDataBtn.addEventListener('click', function () {
+    insert.style.display = "block";
+})*/
+
+const menuHideBtn = document.getElementById('menuHideBtn')
 $(document).ready(function () {
     const myTable = "#myTable"
+    const myTable2 = "#myTable2"
     getTable(myTable)
+    getTable(myTable2)
     SortingDates()
 
     function getTable(id) {
@@ -48,47 +74,45 @@ $(document).ready(function () {
 
 });
 
-function SortingDates() {
+let today = new Date()
+console.log(today)
+let todayBr = new Date(today).toLocaleDateString('pt-BR')
 
+function SortingDates() {
+    
     let datas = document.querySelectorAll('.lastPurchase')
+    
 
     datas.forEach(function (data) {
 
         let date = data.innerText
         let _newdate = new Date(date).toLocaleDateString('pt-BR')
+        const dateLong = new Date(date)
+        
+        
 
-        data.innerText = _newdate
+        if (today > dateLong ) {
+            data.innerHTML = `<p class="lastPurchaseRed">${_newdate}</p>`
+            console.log("datelong ", dateLong, "today", today)
+        }
+        else {
+            data.innerHTML = `<p class="lastPurchase">${_newdate}</p>`
+        }
 
     })
+
+
 }
 
 
-
-    const customer = document.getElementById('Customers')
-    const analytics = document.getElementById('Analytics')
-    const home = document.getElementById('Home')
-    const keyBtn = document.getElementById('keyBtn')
-
-    const url = window.location.pathname
-
-    if (url.includes('Home')) {
-        home.classList.add('bgImageLink')
-    }
-    if (url.includes('Analytics')) {
-        analytics.classList.add('bgImageLink')
-    }
-    if (url.includes('Customer')) {
-        customer.classList.add('bgImageLink')
-    }
-    if (url.includes('ChangePassword')) {
-        keyBtn.classList.add('keyBtnColor')
-    }
-
-
-    const insertDataBtn = document.getElementById('insertDataBtn')
-    const insert = document.getElementById('insert')
-
-    insertDataBtn.addEventListener('click', function () {
-        insert.style.display = "block";
-    })
+/*menuHideBtn.addEventListener('click', function () {
+    const main = document.querySelector('.main')
+    const aside = document.querySelector('.aside')
+    const headerNav = document.querySelector('.header_nav')
+ 
+    headerNav.style.opacity = '0';
+ 
+    aside.style.marginLeft = '-10.525rem';
+    main.style.marginLeft = '3.1rem';
+})*/
 

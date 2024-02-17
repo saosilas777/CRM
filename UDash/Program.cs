@@ -26,7 +26,7 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ILoginRepository, LoginRepository>();
 builder.Services.AddScoped<ISendEmail, SendEmail>();
-builder.Services.AddSingleton<ISection, Section>();
+builder.Services.AddSingleton<CRM.Interfaces.IUserSession, Session>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<SendFileImageRepository, SendFileImageRepository>();
 builder.Services.AddScoped<SendFileService, SendFileService>();
@@ -64,9 +64,9 @@ builder.Services.AddSession(obj =>
 {
 	obj.Cookie.HttpOnly = true;
 	obj.Cookie.IsEssential = true;
-	obj.IdleTimeout = TimeSpan.FromDays(5);
-	obj.IOTimeout = TimeSpan.FromDays(5);
-	
+	obj.IdleTimeout = TimeSpan.FromMinutes(45);
+	obj.IOTimeout = TimeSpan.FromSeconds(30);
+
 });
 
 
@@ -75,7 +75,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-	app.UseExceptionHandler("/Home/Error");
+	app.UseExceptionHandler("/Login/Login");
 	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 	app.UseHsts();
 }

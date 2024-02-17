@@ -36,9 +36,10 @@ namespace CRM.Repository
 
 		
 
-		public UserModel BuscarPorEmaileLogin(string login, string email)
+		public UserModel BuscarPorEmail(string email)
 		{
-			throw new NotImplementedException();
+			var user = _context.Users.FirstOrDefault(x => x.Email == email);
+			return user;
 		}
 
 		public UserModel BuscarPorId(Guid id)
@@ -46,9 +47,9 @@ namespace CRM.Repository
 			return _context.Users.FirstOrDefault(x => x.Id == id);
 		}
 
-		public UserModel BuscarPorLogin(LoginViewModel login)
+		public UserModel BuscarPorLogin(string login)
 		{
-			LoginModel? loginDB = _context.Login.FirstOrDefault(x => x.Login == login.Login);
+			LoginModel? loginDB = _context.Login.FirstOrDefault(x => x.Login == login);
 			if(loginDB != null)
 			{
 				UserModel? user = _context.Users.FirstOrDefault(x => x.Id == loginDB.UserId);

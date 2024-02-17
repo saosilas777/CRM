@@ -1,4 +1,5 @@
-﻿(function () {
+﻿
+(function () {
     'use strict'
 
 
@@ -84,24 +85,24 @@
     const editableInsert = document.querySelectorAll('.editableInsert')
 
 
-    insertBtn.addEventListener('click', function () {
+/*    insertBtn.addEventListener('click', function () {
         insertBtn.style.display = 'none'
         cancelInsertBtn.style.display = 'flex'
         saveInsertBtn.style.display = 'flex'
         InsertRegistration();
     })
-
-    cancelInsertBtn.addEventListener('click', function () {
+*/
+/*    cancelInsertBtn.addEventListener('click', function () {
         insertBtn.style.display = 'flex'
         cancelInsertBtn.style.display = 'none'
         saveInsertBtn.style.display = 'none'
         InsertRegistration()
-    })
+    })*/
 
-    saveInsertBtn.addEventListener('click', function () {
+/*    saveInsertBtn.addEventListener('click', function () {
         const submitInsertBtn = document.getElementById('submitInsertBtn')
         submitInsertBtn.click();
-    })
+    })*/
 
 
     function InsertRegistration() {
@@ -110,4 +111,10 @@
         })
     }
 
+    const ContactRecordsAnotation = document.getElementById('ContactRecordsAnotation')
+    ContactRecordsAnotation.addEventListener('focus', function () {
+        const ContactRecordsDate = document.getElementById('ContactRecordsDate')
+        ContactRecordsDate.value = '';
+    })
 })()
+

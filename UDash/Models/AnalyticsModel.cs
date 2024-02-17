@@ -9,6 +9,10 @@
 		public int ActiveCustomers { get; set; }
 		public int InactiveCustomers { get; set; }
 		public double? TotalSalesMonth { get; set; }
+		public double? BaseSalary { get; set; }
+		public double? Commission { get; set; }
+		public double? PaidWeeklyRest { get; set; }
+		public double? TotalPayment { get; set; }
 
 	}
 }

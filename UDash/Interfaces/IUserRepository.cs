@@ -7,8 +7,8 @@ namespace CRM.Interfaces
 	{
 		bool Create(LoginModel login);
 
-		UserModel BuscarPorLogin(LoginViewModel login);
-		UserModel BuscarPorEmaileLogin(string login, string email);
+		UserModel BuscarPorLogin(string login);
+		UserModel BuscarPorEmail(string email);
 		List<UserModel> BuscarTodos();
 		UserModel BuscarPorId(Guid id);
 		UserModel Editar(UserModel contato);

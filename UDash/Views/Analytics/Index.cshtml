@@ -2,6 +2,13 @@
 @{
 	double totalSales = double.Parse(Model.TotalSalesMonth.ToString());
 	string _totalSales = totalSales.ToString("C2", new System.Globalization.CultureInfo("pt-BR"));
+	double commission = double.Parse(Model.Commission.ToString());
+	string _commission = commission.ToString("C2", new System.Globalization.CultureInfo("pt-BR"));
+	double pwr = double.Parse(Model.PaidWeeklyRest.ToString());
+	string _pwr = pwr.ToString("C2", new System.Globalization.CultureInfo("pt-BR"));
+	double totalPayment = double.Parse(Model.TotalPayment.ToString());
+	string _totalPayment = totalPayment.ToString("C2", new System.Globalization.CultureInfo("pt-BR"));
+
 
 }
 
@@ -48,6 +55,54 @@
 			<span class="horizontal-line"></span>
 			<div class="ticket_content">
 				<p>@_totalSales</p>
+			</div>
+		</div>
+
+	</section>
+	<section class="content-cards display analytics">
+		<div class="tickets people2 ">
+			<span class="ticket_figure"><i class="fa-solid fa-dollar-sign"></i></span>
+			<div class="ticket_header">
+				<p>Salário Base</p>
+			</div>
+			<span class="horizontal-line"></span>
+			<div class="ticket_content">
+
+				<p class="margin_right"></p>
+				<p id="TotalPortfolio">@Model.BaseSalary</p>
+			</div>
+		</div>
+		<div class="tickets handshake2">
+			<span class="ticket_figure"><i class="fa-solid fa-sack-dollar"></i></span>
+			<div class="ticket_header">
+				<p>Comissão</p>
+			</div>
+			<span class="horizontal-line"></span>
+			<div class="ticket_content">
+				@{
+					
+				}
+				<p>@_commission</p>
+			</div>
+		</div>
+		<div class="tickets arrow2">
+			<span class="ticket_figure"><i class="fa-solid fa-socks"></i></span>
+			<div class="ticket_header">
+				<p>DSR</p>
+			</div>
+			<span class="horizontal-line"></span>
+			<div class="ticket_content">
+				<p>@_pwr</p>
+			</div>
+		</div>
+		<div class="tickets dollar2">
+			<span class="ticket_figure"><i class="fa-regular fa-money-bill-1"></i></span>
+			<div class="ticket_header">
+				<p>Total de vencimentos</p>
+			</div>
+			<span class="horizontal-line"></span>
+			<div class="ticket_content">
+				<p>@_totalPayment</p>
 			</div>
 		</div>
 

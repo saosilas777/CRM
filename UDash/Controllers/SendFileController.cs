@@ -5,6 +5,7 @@ using CRM.Models;
 using CRM.Repository;
 using CRM.Services;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace CRM.Controllers
 {
@@ -14,15 +15,15 @@ namespace CRM.Controllers
 		private readonly SendFileImageRepository _sendFileImageRepository;
 
 
-		private readonly ISection _section;
+		private readonly Interfaces.IUserSession _session;
 		private readonly ICustomerRepository _customerRepository;
 
 
-		public SendFileController(ISection section, SendFileService sendFileService, 
+		public SendFileController(Interfaces.IUserSession section, SendFileService sendFileService, 
 								  ICustomerRepository customerRepository,
 								  SendFileImageRepository sendFileImage)
 		{
-			_section = section;
+			_session = section;
 			_sendFileService = sendFileService;
 			_customerRepository = customerRepository;
 			_sendFileImageRepository = sendFileImage;
@@ -76,7 +77,7 @@ namespace CRM.Controllers
 					return RedirectToAction("sendFileImage", "SendFile");
 				}
 
-				var user = TokenService.GetDataInToken(_section.GetUserSection());
+				var user = _session.GetUserSection();
 				SendFileImageModel image = new SendFileImageModel();
 				image.Url = url;
 				image.UserId = user.Id;

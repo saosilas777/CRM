@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Az8FPbDH2yMhzvdzgTCFrq6up1QI5FABs1oWqQUh5E8=",
+  "Hash": "gnSw+qkJtSrNze0nDWStCHaJ91PNJL+eO7swntnumoE=",
   "Source": "CRM",
   "BasePath": "_content/CRM",
   "Mode": "Default",
@@ -185,6 +185,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\InsertNewField.js"
+    },
+    {
+      "Identity": "Z:\\CRM\\UDash\\wwwroot\\js\\SaveToken.js",
+      "SourceId": "CRM",
+      "SourceType": "Discovered",
+      "ContentRoot": "Z:\\CRM\\UDash\\wwwroot\\",
+      "BasePath": "_content/CRM",
+      "RelativePath": "js/SaveToken.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\SaveToken.js"
     },
     {
       "Identity": "Z:\\CRM\\UDash\\wwwroot\\js\\SelectTableItems.js",

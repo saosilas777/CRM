@@ -2,34 +2,38 @@
 using CRM.Models;
 using CRM.Repository;
 using CRM.Services;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.DataProtection;
+using CRM.Interfaces;
 
 namespace CRM.ViewComponents
 {
 	public class Header : ViewComponent
 	{
 		private readonly SendFileImageRepository _sendFileImage;
-
-		public Header(SendFileImageRepository sendFileImage)
+		private readonly Interfaces.IUserSession _session;
+		private readonly IUserRepository _userRepository;
+		
+		public Header(SendFileImageRepository sendFileImage,  
+					  IUserRepository userRepository,
+                      Interfaces.IUserSession section)
 		{
 			_sendFileImage = sendFileImage;
+			_userRepository = userRepository;
+			_session = section;
 		}
+		
 
-		public async Task<IViewComponentResult> InvokeAsync()
+		public  async Task<IViewComponentResult> InvokeAsync()
 		{
 			try
 			{
-				string UserSection = HttpContext.Session.GetString("Token");
-
-				if (string.IsNullOrEmpty(UserSection))
-				{
-					return null;
-				}
-				UserModel user = TokenService.GetDataInToken(UserSection);
-				var imageModel = _sendFileImage.GetById(user.Id);
+				var user = _session.GetUserSection();
+				SendFileImageModel imageModel = _sendFileImage.GetById(user.Id);
 				UserViewModel userView = new UserViewModel();
 
 				if (imageModel == null)
-				{					
+				{
 					userView.User = user;
 					userView.Image = new SendFileImageModel()
 					{
@@ -40,7 +44,7 @@ namespace CRM.ViewComponents
 					return View(userView);
 				}
 				userView.User = user;
-				
+
 				userView.Image = imageModel;
 
 

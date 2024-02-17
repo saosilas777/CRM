@@ -2,24 +2,26 @@
 using CRM.Interfaces;
 using CRM.Models;
 using CRM.Services;
+using System.Reflection.PortableExecutable;
 
 namespace CRM.Controllers
 {
 	public class HomeController : Controller
 	{
 		#region Dependencies
-		private readonly ISection _section;
-		public HomeController(ISection section)
+		private readonly Interfaces.IUserSession _session;
+		public HomeController(Interfaces.IUserSession section)
 		{
-			_section = section;
+			_session = section;
 
 		}
 
 		#endregion
 
-		public IActionResult Index()
+		public IActionResult Index(UserModel user)
 		{
-				return View();			
+
+			return View(user);
 			
 		}
 	}

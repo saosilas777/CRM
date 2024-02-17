@@ -9,13 +9,13 @@ namespace CRM.Repository
 {
 	public class CustomerRepository : ICustomerRepository
 	{
-		private readonly ISection _section;
+		private readonly Interfaces.IUserSession _session;
 		private readonly Context _context;
 		public CustomerRepository(Context context,
-								ISection section)
+                                Interfaces.IUserSession section)
 		{
 			_context = context;
-			_section = section;
+			_session = section;
 		}
 
 
@@ -85,8 +85,7 @@ namespace CRM.Repository
 
 		public bool Create(_CustomerCreateViewModel customer)
 		{
-			string token = _section.GetUserSection();
-			UserModel user = TokenService.GetDataInToken(token);
+			var user = _session.GetUserSection();
 			List<_EmailModel> emails = new();
 			_EmailModel email = new();
 			List<_PhoneModel> phones = new();
@@ -187,8 +186,7 @@ namespace CRM.Repository
 
 
 				};
-				string token = _section.GetUserSection();
-				UserModel user = TokenService.GetDataInToken(token);
+				var user = _session.GetUserSection();
 
 				customer.UserId = user.Id;
 				_customers.Add(customer);
@@ -283,11 +281,5 @@ namespace CRM.Repository
 
 		}
 
-		public void TokenValidationRegister(testeTokenValid token)
-		{
-			_context.Add(token);
-			_context.SaveChanges();
-
-		}
 	}
 }

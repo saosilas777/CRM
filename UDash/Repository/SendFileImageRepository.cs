@@ -3,7 +3,7 @@ using CRM.Models;
 
 namespace CRM.Repository
 {
-	
+
 	public class SendFileImageRepository
 	{
 		private readonly Context _context;
@@ -29,10 +29,9 @@ namespace CRM.Repository
 		}
 		public SendFileImageModel GetById(Guid id)
 		{
-			var image = _context.ImageUrl.FirstOrDefault(x => x.UserId == id);
-			return image;
+			return _context.ImageUrl.FirstOrDefault(x => x.UserId == id);
+
+
 		}
-
-
 	}
 }

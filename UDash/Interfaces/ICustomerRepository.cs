@@ -15,7 +15,7 @@ namespace CRM.Interfaces
 		List<_CustomerModel> AtualizarTodos(List<_CustomerModel> customers);
 
 		bool RegistrationContact(string anotation,string date, Guid id);
-		void TokenValidationRegister(testeTokenValid token);
+		
 
 
 

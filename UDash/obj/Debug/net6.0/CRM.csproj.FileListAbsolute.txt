@@ -132,6 +132,7 @@ Z:\CRM\UDash\bin\Debug\net6.0\Microsoft.IO.RecyclableMemoryStream.dll
 Z:\CRM\UDash\bin\Debug\net6.0\Microsoft.SqlServer.Server.dll
 Z:\CRM\UDash\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
 Z:\CRM\UDash\bin\Debug\net6.0\Mono.TextTemplating.dll
+Z:\CRM\UDash\bin\Debug\net6.0\Newtonsoft.Json.dll
 Z:\CRM\UDash\bin\Debug\net6.0\System.CodeDom.dll
 Z:\CRM\UDash\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
 Z:\CRM\UDash\bin\Debug\net6.0\System.Drawing.Common.dll

@@ -6,6 +6,8 @@ using CRM.Models.ViewModels;
 using CRM.Repository;
 using CRM.Services;
 using OfficeOpenXml.FormulaParsing.LexicalAnalysis;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace CRM.Controllers
 {
@@ -13,58 +15,35 @@ namespace CRM.Controllers
 	{
 		#region Dependencies
 		private readonly ICustomerRepository _customer;
-		private readonly ISection _section;
+		private readonly IUserSession _session;
 		public CustomerController(ICustomerRepository customer,
-									ISection section
+                                   IUserSession session
 									)
 		{
-			_customer = customer; _section = section;
+			_customer = customer; 
+			_session = session;
 
 		}
 		#endregion
-
-
+		
 		public IActionResult Index()
 		{
-			try
-			{
-				var token = _section.GetUserSection();
-				var validationToken = TokenService.TokenIsValid(token);
-				_customer.TokenValidationRegister(validationToken);
-				if (validationToken.IsValid == true)
-				{
-					var user = TokenService.GetDataInToken(token);
-					List<_CustomerModel> customers = _customer.BuscarTodos(user.Id);
-
-					return View(customers);
-				}
-				else
-				{
-					_section.UserSectionRemove();
-					return RedirectToAction("Login", "Login");
-				}
-				
-
-			}
-			catch (Exception e)
-			{
-
-				throw new Exception(e.Message);
-			}
-			
+			var user = _session.GetUserSection();
+			List<_CustomerModel> customers = _customer.BuscarTodos(user.Id);
+			return View(customers);
 		}
-		
+
 		public IActionResult Editar(Guid id)
 		{
 			_CustomerEditViewModel customerDb = _customer.BuscarPorId(id);
-		
+
 
 			return View(customerDb);
 		}
 
 		public IActionResult Create()
 		{
-			
+
 			return View();
 		}
 
@@ -73,9 +52,8 @@ namespace CRM.Controllers
 		{
 			try
 			{
-				var token = _section.GetUserSection();
-				var user = TokenService.GetDataInToken(token);
-				if (initialDate != null && finalDate != null)
+				var user = _session.GetUserSection();
+				if (initialDate != null && finalDate != null && user != null)
 				{
 
 					var customers = _customer.BuscarTodos(user.Id).Where(x => x.NextContactDate >= DateTime.Parse(initialDate) && x.NextContactDate <= DateTime.Parse(finalDate)).ToList();
@@ -111,7 +89,7 @@ namespace CRM.Controllers
 		public IActionResult RegistrationContact(_CustomerEditViewModel customer)
 		{
 			_customer.RegistrationContact(customer.ContactRecordsAnotation[0], customer.NextContactDate, customer.Id);
-			return RedirectToAction("Editar", "Customer",new { customer.Id });
+			return RedirectToAction("Editar", "Customer", new { customer.Id });
 		}
 
 		[HttpPost]

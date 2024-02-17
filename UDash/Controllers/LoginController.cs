@@ -5,27 +5,29 @@ using CRM.Models;
 using CRM.Models.ViewModels;
 using CRM.Repository;
 using CRM.Services;
+using CRM.ViewComponents;
+using System.ComponentModel;
 
 namespace CRM.Controllers
 {
-	
+
 	public class LoginController : Controller
 	{
 		#region Dependencies
 		private readonly ILoginRepository _loginRepository;
 		private readonly IUserRepository _userRepository;
-		private readonly ISection _section;
+		private readonly Interfaces.IUserSession _session;
 
 		private readonly ISendEmail _sendEmail;
 
 		public LoginController(ILoginRepository loginRepository,
 							  IUserRepository userRepository,
-							  ISection section,
+                              Interfaces.IUserSession section,
 							  ISendEmail sendEmail)
 		{
 			_loginRepository = loginRepository;
 			_userRepository = userRepository;
-			_section = section;
+			_session = section;
 			_sendEmail = sendEmail;
 
 		}
@@ -34,18 +36,15 @@ namespace CRM.Controllers
 
 		public IActionResult Login()
 		{
-			var token = _section.GetUserSection();
-			
-			if (token != null)
-			{
-			  return RedirectToAction("Index", "Home");
-			};
+			var user = _session.GetUserSection();
+
+			if (user != null) return RedirectToAction("Index", "Home");
 			return View();
 		}
 
 		public IActionResult Logout()
 		{
-			_section.UserSectionRemove();
+			_session.UserSectionRemove();
 			return RedirectToAction("Login");
 		}
 		public IActionResult SignUp()
@@ -88,7 +87,6 @@ namespace CRM.Controllers
 		[HttpPost]
 		public IActionResult Entrar(LoginViewModel loginViewModel)
 		{
-
 			try
 			{
 				if (ModelState.IsValid)
@@ -96,19 +94,18 @@ namespace CRM.Controllers
 					var loginDb = _loginRepository.BuscarPorLogin(loginViewModel.Login);
 					if (loginDb != null && loginDb.Password == LoginServices.HashGeneration(loginViewModel.Password))
 					{
-						var authenticated = TokenService.Authenticate(loginDb.User);
-						_section.UserSectionCreate(authenticated);
-/*						UserModel user = TokenService.GetDataInToken(authenticated);*/
-						if(authenticated != null)
-						{
-							return RedirectToAction("Index", "Home");
-
-						}
+						var user = _userRepository.BuscarPorLogin(loginDb.Login);
 						
+						if (user != null)
+						{
+							_session.UserSectionCreate(user);
+							return RedirectToAction("Index", "Home");
+						}
+
 					}
 					TempData["ErrorMessage"] = $"Usuário ou senha inválidos, tente novamente!.";
 					return View("Login", loginViewModel);
-					
+
 				}
 
 				TempData["ErrorMessage"] = $"Para acessar é necessario informar seu login e senha!";
@@ -148,7 +145,7 @@ namespace CRM.Controllers
 
 				}
 				string senhaProvisoria = Guid.NewGuid().ToString();
-				
+
 				if (_loginRepository.BuscarPorEmail(email))
 				{
 					_sendEmail.SendEmail(email, "Recuperação de senha", senhaProvisoria);

@@ -46,7 +46,7 @@ namespace CRM.Services
 
 			return token;
 		}
-		public static testeTokenValid TokenIsValid(string token)
+		public static bool TokenIsValid(string token)
 		{
 			var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SettingsToken.Secret));
 
@@ -67,20 +67,12 @@ namespace CRM.Services
 				SecurityToken validateToken;
 
 				handler.ValidateToken(token, tokenValid, out validateToken);
-				testeTokenValid tokenRegistration = new testeTokenValid();
-				tokenRegistration.Token = token;
-				tokenRegistration.IsValid = true;
-				tokenRegistration.Date = DateTime.Now;
-				return tokenRegistration;
+				
+				return true;
 			}
-			catch
+			catch (Exception e)
 			{
-				testeTokenValid tokenRegistration = new testeTokenValid();
-				tokenRegistration.Token = token;
-				tokenRegistration.IsValid = false;
-				tokenRegistration.Date = DateTime.Now;
-
-				return tokenRegistration;
+				throw new Exception(e.Message);
 			}
 
 

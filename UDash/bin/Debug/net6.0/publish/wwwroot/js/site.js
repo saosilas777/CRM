@@ -75,23 +75,22 @@ $(document).ready(function () {
 });
 
 let today = new Date()
-console.log(today)
 let todayBr = new Date(today).toLocaleDateString('pt-BR')
 
 function SortingDates() {
-    
+
     let datas = document.querySelectorAll('.lastPurchase')
-    
+
 
     datas.forEach(function (data) {
 
         let date = data.innerText
         let _newdate = new Date(date).toLocaleDateString('pt-BR')
         const dateLong = new Date(date)
-        
-        
 
-        if (today > dateLong ) {
+
+
+        if (today > dateLong) {
             data.innerHTML = `<p class="lastPurchaseRed">${_newdate}</p>`
             console.log("datelong ", dateLong, "today", today)
         }
@@ -105,6 +104,40 @@ function SortingDates() {
 }
 
 
+customer.addEventListener('click', () => {
+    const token = localStorage.getItem("Token")
+
+    const customersInput = document.getElementById('customersInput')
+    const customersFormBtn = document.getElementById('customersFormBtn')
+    customersInput.setAttribute("value", token)
+    customersFormBtn.click()
+
+
+    //$.ajax({
+    //    type: 'POST',
+    //    contentType: 'application/json; charset=utf-8',
+    //    dataType: 'json',
+    //    url: '/Customer/GetCustomers/',
+    //    cache: false,
+    //    data: token
+    //    //    //success: (e) => {
+    //    //    //    console.log('success')
+    //    //    //},
+    //    //    //error: (e) => {
+    //    //    //    console.log('error')
+    //    //    //},
+    //    //    //complete: (e) => {
+    //    //    //    console.log('complete');
+    //    //    //}
+    //    //});
+
+
+    //})
+})
+
+
+
+
 /*menuHideBtn.addEventListener('click', function () {
     const main = document.querySelector('.main')
     const aside = document.querySelector('.aside')
@@ -115,4 +148,3 @@ function SortingDates() {
     aside.style.marginLeft = '-10.525rem';
     main.style.marginLeft = '3.1rem';
 })*/
-

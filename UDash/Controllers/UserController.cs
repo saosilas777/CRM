@@ -9,12 +9,12 @@ namespace CRM.Controllers
 	public class UserController : Controller
 	{
 		private readonly ILoginRepository _loginRepository;
-		private readonly ISection _section;
+		private readonly Interfaces.IUserSession _session;
 
-		public UserController(ILoginRepository loginRepository, ISection section)
+		public UserController(ILoginRepository loginRepository, Interfaces.IUserSession section)
 		{
 			_loginRepository = loginRepository;
-			_section = section;
+			_session = section;
 		}
 	
 		public IActionResult Index()
@@ -24,12 +24,15 @@ namespace CRM.Controllers
 
 		public IActionResult ChangePassword()
 		{
-			var user = TokenService.GetDataInToken(_section.GetUserSection());
+			var user = _session.GetUserSection();
 			ChangePasswordViewModel viewModel = new();
 			viewModel.UserId = user.Id;
 			return View(viewModel);
 		}
-
+		public IActionResult NonUserPage()
+		{
+			return View();
+		}
 		[HttpPost]
 		public IActionResult ChangePassword(ChangePasswordViewModel viewModel)
 		{

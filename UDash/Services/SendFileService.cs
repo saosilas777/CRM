@@ -11,12 +11,12 @@ namespace CRM.Services
 {
 	public class SendFileService
 	{
-		private readonly ISection _section;
+		private readonly Interfaces.IUserSession _session;
 		private readonly ICustomerRepository _customerRepository;
 
-		public SendFileService(ISection section, ICustomerRepository customerRepository)
+		public SendFileService(Interfaces.IUserSession section, ICustomerRepository customerRepository)
 		{
-			_section = section;
+			_session = section;
 			_customerRepository = customerRepository;
 		}
 
@@ -24,8 +24,7 @@ namespace CRM.Services
 		{
 			var streamFile = ReadStrem(uploadFile);
 
-			string token = _section.GetUserSection();
-			UserModel user = TokenService.GetDataInToken(token);
+			var user = _session.GetUserSection();
 			List<_CustomerModel> response = new();
 			ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
 
@@ -126,8 +125,7 @@ namespace CRM.Services
 		}
 		public List<_CustomerModel> VerifyDuplicate(List<_CustomerModel> customer)
 		{
-			var token = _section.GetUserSection();
-			var user = TokenService.GetDataInToken(token);
+			var user = _session.GetUserSection();
 			List<_CustomerModel> customerDb = _customerRepository.BuscarTodos(user.Id);
 
 			var month = DateTime.Now.Month;
@@ -158,8 +156,7 @@ namespace CRM.Services
 
 		public void VerifyDuplicatedCustomers(List<_CustomerModel> customer)
 		{
-			var token = _section.GetUserSection();
-			var user = TokenService.GetDataInToken(token);
+			var user = _session.GetUserSection();
 			List<_CustomerModel> customerDb = _customerRepository.BuscarTodos(user.Id);
 
 			if (customerDb.Count() < customer.Count())
