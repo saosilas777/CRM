@@ -113,7 +113,7 @@
 								<input class="editable" type="date" value="@Model.LastPurchaseDate.ToString("yyyy-MM-dd")" asp-for="@Model.LastPurchaseDate" disabled />
 								<input class="editable" value="@Model.LastPurchaseValue" asp-for="@Model.LastPurchaseValue" disabled />
 								@{
-									
+
 									<input class="editable" id="reciver" type="date" value="@date" asp-for="@Model.NextContactDate" disabled />
 
 								}
@@ -144,20 +144,19 @@
 										<button type="button" class="card_cta-saveChanges" id="card_cta-saveChanges">Salvar</button>
 									</div>
 
-									<div id="deleteConfirm">
+									<div class="deleteAlertContainer" id="deleteConfirm">
 										<button type="reset" class="card_cta-delet cancelDelete" id="cancelDelete">Cancelar</button>
 										<button type="button" class="card_cta-saveChanges" id="confirmDelete">Confirmar</button>
 									</div>
-
-									<button id="btnSubmitDelete" class="btnSubmit" type="submit" asp-action="Delete"></button>
-									<button id="btnSubmitEdit" class="btnSubmit" type="submit" asp-action="Edit"></button>
+									<button id="btnSubmitDelete" class="btnSubmit" type="submit" asp-action="Delete" disabled></button>
+									<button id="btnSubmitEdit" class="btnSubmit" type="submit" asp-action="Edit" disabled></button>
 								</div>
 							</div>
 
 
 
 						</div>
-						
+
 					</div>
 				</form>
 			</div>

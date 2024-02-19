@@ -46,8 +46,8 @@ namespace CRM.Services
 							Codigo = worksheet.Cells[row, 1].Value.ToString(),
 							RazaoSocial = worksheet.Cells[row, 2].Value.ToString(),
 							LastPurchaseDate = DateTime.Parse(worksheet.Cells[row, 3].Value.ToString()),
-							LastPurchaseValue = double.Parse(worksheet.Cells[row,4].Value.ToString()),
-							
+							LastPurchaseValue = double.Parse(worksheet.Cells[row, 4].Value.ToString()),
+
 							UserId = user.Id,
 
 
@@ -159,22 +159,32 @@ namespace CRM.Services
 			var user = _session.GetUserSection();
 			List<_CustomerModel> customerDb = _customerRepository.BuscarTodos(user.Id);
 
-			if (customerDb.Count() < customer.Count())
-			{
-				for (int i = 0; i < customer.Count(); i++)
-				{
-					for (int j = 0; j < customerDb.Count(); j++)
-					{
-						if (customerDb[j].Codigo == customer[i].Codigo)
-						{
+			int customerCount = customer.Count();
+			int customerDbCount = customerDb.Count();
 
+			if (customerDb.Count() > 0)
+			{
+
+				foreach (var item in customerDb)
+				{
+					for (int i = 0; i < customer.Count(); i++)
+					{
+						if (item.Codigo == customer[i].Codigo)
+						{
 							customer.Remove(customer[i]);
 						}
 					}
-
 				}
+
+
+			}
+			if (customer.Count() > 0)
+			{
 				_customerRepository.AdicionarTodos(customer);
 			}
+
+
+
 		}
 		public MemoryStream ReadStrem(IFormFile file)
 		{

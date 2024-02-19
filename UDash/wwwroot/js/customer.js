@@ -27,6 +27,7 @@
     const btnSubmitEdit = document.querySelector('#btnSubmitEdit')
     const btnSubmitDelete = document.querySelector('#btnSubmitDelete')
     const btnSave = document.getElementById('card_cta-saveChanges')
+
     const deleteAlert = document.getElementById('deleteAlertContainer')
 
 
@@ -38,9 +39,12 @@
 
 
     function SubmitEdit() {
+        btnSubmitEdit.disabled = !btnSubmitEdit.disabled
+
         btnSubmitEdit.click();
     }
     function SubmitDelete() {
+        btnSubmitDelete.disabled = !btnSubmitDelete.disabled
         btnSubmitDelete.click();
     }
 
