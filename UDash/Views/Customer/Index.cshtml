@@ -22,9 +22,10 @@
 
 			<form asp-action="SendFile" asp-controller="SendFile" method="post" enctype="multipart/form-data">
 				<label for="btn-send-file" class="btn btn-primary input-file col-md-2 text-center">Procurar Arquivo</label>
-				<input id="btn-send-file" class="btn btn-success input-file col-md-2 text-center" name="uploadFile" type="file" multiple hidden />
+				<input id="btn-send-file" class="btn btn-success input-file col-md-2 text-center" name="uploadFile" type="file" multiple hidden/>
 				<button id="sendFileBtn" class="col-md-2 input-file-btn" type="submit">Enviar</button>
 			</form>
+			<div id="inputFileName"></div>
 		</div>
 		<div class="addCustomerBtn">
 			<a asp-action="Create" asp-controller="Customer">Adicionar Novo Cliente <i class="fa-solid fa-hand-pointer"></i></a>

@@ -64,7 +64,7 @@ builder.Services.AddSession(obj =>
 {
 	obj.Cookie.HttpOnly = true;
 	obj.Cookie.IsEssential = true;
-	obj.IdleTimeout = TimeSpan.FromMinutes(45);
+	obj.IdleTimeout = TimeSpan.FromHours(8);
 	obj.IOTimeout = TimeSpan.FromSeconds(30);
 
 });

@@ -57,7 +57,8 @@ namespace CRM.Controllers
 			catch (Exception e)
 			{
 
-				throw new Exception(e.Message);
+				TempData["ErrorMessage"] = "Não foi possível ler o arquivo inserido, se o erro persistir verifique se não há falhas no arquivo.";
+				return RedirectToAction("Index", "Customer");
 			}
 		}
 

@@ -8,6 +8,8 @@
 	string _pwr = pwr.ToString("C2", new System.Globalization.CultureInfo("pt-BR"));
 	double totalPayment = double.Parse(Model.TotalPayment.ToString());
 	string _totalPayment = totalPayment.ToString("C2", new System.Globalization.CultureInfo("pt-BR"));
+	double _baseSalary = double.Parse(Model.BaseSalary.ToString());
+	string baseSalary = _baseSalary.ToString("C2", new System.Globalization.CultureInfo("pt-BR"));
 
 
 }
@@ -69,7 +71,7 @@
 			<div class="ticket_content">
 
 				<p class="margin_right"></p>
-				<p id="TotalPortfolio">@Model.BaseSalary</p>
+				<p id="TotalPortfolio">@baseSalary</p>
 			</div>
 		</div>
 		<div class="tickets handshake2">

@@ -87,12 +87,8 @@ function SortingDates() {
         let date = data.innerText
         let _newdate = new Date(date).toLocaleDateString('pt-BR')
         const dateLong = new Date(date)
-
-
-
         if (today > dateLong) {
             data.innerHTML = `<p class="lastPurchaseRed">${_newdate}</p>`
-            console.log("datelong ", dateLong, "today", today)
         }
         else {
             data.innerHTML = `<p class="lastPurchase">${_newdate}</p>`
@@ -135,7 +131,11 @@ customer.addEventListener('click', () => {
     //})
 })
 
+const btnSendFile = document.getElementById('btn-send-file')
 
+btnSendFile.addEventListener('change', () => {
+    document.getElementById('inputFileName').innerText = btnSendFile.files[0].name
+})
 
 
 /*menuHideBtn.addEventListener('click', function () {

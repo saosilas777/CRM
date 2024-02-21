@@ -866,6 +866,7 @@ img {
     align-items: center;
     gap: 1rem;
     height: 50%;
+    margin:0;
     margin-right: 1rem;
     font-size: 1.1rem;
 }
@@ -1083,7 +1084,7 @@ table.myTable {
         color: #fff;
     }
 
-.registrationsContainer {
+.registrationsContainer form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -1455,6 +1456,9 @@ p.newField {
 .card_content {
     grid-column: 1/ 7;
     grid-row: 1;
+}
+#btn-send-file{
+    appearance:none;
 }
 /*////////////////////////////////////////////////////////////////////////////////////////////*/
 /*SendFile*/

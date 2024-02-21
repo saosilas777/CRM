@@ -20,49 +20,51 @@
 
 			<div class="card_container">
 				<section class="registrationsContainer">
-					<div class="registrationsContent">
-						<div class="registrationTitle">
-							<h1>Registros de contato</h1>
-						</div>
-						@{
-							int _count = Model.ContactRecordsAnotation.Length - 1;
+					<form asp-controller="Customer" asp-action="RegistrationContact" method="post">
+						<div class="registrationsContent">
+							<div class="registrationTitle">
+								<h1>Registros de contato</h1>
+							</div>
+							@{
+								int _count = Model.ContactRecordsAnotation.Length - 1;
 
-							if (_count < 0)
-							{
-								<div>
-									<p>Ainda não há registros de contatos recentes</p>
-								</div>
-							}
-							else
-							{
-								@for (int i = _count; i >= 0; i--)
+								if (_count < 0)
 								{
-									<div class="registrationsCard">
-										<span>@Model.ContactRecordsDate[i] - @Model.RazaoSocial</span>
-										<div class="contentRegistration">
-											@Model.ContactRecordsAnotation[i]
-										</div>
+									<div>
+										<p>Ainda não há registros de contatos recentes</p>
 									</div>
 								}
+								else
+								{
+									@for (int i = _count; i >= 0; i--)
+									{
+										<div class="registrationsCard">
+											<span>@Model.ContactRecordsDate[i] - @Model.RazaoSocial</span>
+											<div class="contentRegistration">
+												@Model.ContactRecordsAnotation[i]
+											</div>
+										</div>
+									}
+								}
+
 							}
-
-						}
-					</div>
-
-					<div class="registrationInput">
-
-						<textarea id="ContactRecordsAnotation" name="ContactRecordsAnotation"></textarea>
-						<div class="registrationInputCta">
-							@{
-
-								<input id="ContactRecordsDate" type="date" type="date" value="@date" asp-for="@Model.NextContactDate" required />
-							}
-
-							<button type="submit" asp-action="RegistrationContact" asp-controller="Customer" class="card_cta-saveChanges btnInsertContact">Enviar</button>
 						</div>
 
-					</div>
+						<div class="registrationInput">
 
+							<textarea id="ContactRecordsAnotation" name="ContactRecordsAnotation"></textarea>
+							<div class="registrationInputCta">
+								@{
+
+									<input id="ContactRecordsDate"  type="date" value="@date" asp-for="@Model.NextContactDate" required />
+									<input type="text"  value="@Model.Id" asp-for="@Model.Id" hidden />
+								}
+
+								<button type="submit" class="card_cta-saveChanges btnInsertContact">Enviar</button>
+							</div>
+
+						</div>
+					</form>
 				</section>
 				<form asp-action="Edit" asp-action="Delete" asp-controller="Customer" method="post" class="card_content" id="EditForm">
 					<input asp-for="@Model.Id" hidden />
