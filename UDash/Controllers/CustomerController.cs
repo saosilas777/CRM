@@ -40,10 +40,9 @@ namespace CRM.Controllers
 
 			return View(customerDb);
 		}
-
+		[HttpGet]
 		public IActionResult Create()
 		{
-
 			return View();
 		}
 
@@ -75,8 +74,25 @@ namespace CRM.Controllers
 		[HttpPost]
 		public IActionResult Create(_CustomerCreateViewModel customer)
 		{
-			_customer.Create(customer);
-			return View();
+			try
+			{
+				if (ModelState.IsValid)
+				{
+					_customer.Create(customer);
+					TempData["SuccessMessage"] = "Cadastro realizado com sucesso!";
+					return View("Create");
+
+				}
+				
+				TempData["ErrorMessage"] = "Não foi possível realizar o cadastro, tente novamente!";
+				return View(customer);
+
+			}
+			catch (Exception e)
+			{
+				throw new Exception(e.Message);
+			}
+			
 		}
 
 		[HttpPost]

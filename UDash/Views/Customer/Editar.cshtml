@@ -6,10 +6,11 @@
 
 <div class="main">
 	@await Component.InvokeAsync("Header")
+	
 	<section class="customerBody">
 		<article class="customerCard">
-			<div id="deleteAlertContainer">
-				<div id="deleteAlert" class="deleteAlert">
+			<div id="spanAlertContainer">
+				<div id="spanAlert" class="spanAlert">
 					<span>
 						Deseja realmente deletar o cliente:<br />
 						<b>@Model.RazaoSocial</b>
@@ -146,7 +147,7 @@
 										<button type="button" class="card_cta-saveChanges" id="card_cta-saveChanges">Salvar</button>
 									</div>
 
-									<div class="deleteAlertContainer" id="deleteConfirm">
+									<div class="spanAlertContainer" id="deleteConfirm">
 										<button type="reset" class="card_cta-delet cancelDelete" id="cancelDelete">Cancelar</button>
 										<button type="button" class="card_cta-saveChanges" id="confirmDelete">Confirmar</button>
 									</div>

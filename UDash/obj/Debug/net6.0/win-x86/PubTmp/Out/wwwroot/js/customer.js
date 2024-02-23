@@ -29,7 +29,7 @@
 
     const btnSave = document.getElementById('card_cta-saveChanges')
 
-    const deleteAlert = document.getElementById('deleteAlertContainer')
+    const spanAlert = document.getElementById('spanAlertContainer')
 
 
 
@@ -73,12 +73,12 @@
     function confirmDelete() {
         editOrDelete.style.display = 'none'
         deleteConfirm.style.display = 'flex'
-        deleteAlert.style.display = 'flex'
+        spanAlert.style.display = 'flex'
 
     }
 
     function cancelDelete() {
-        deleteAlert.style.display = 'none'
+        spanAlert.style.display = 'none'
         editOrDelete.style.display = 'flex'
         deleteConfirm.style.display = 'none'
     }

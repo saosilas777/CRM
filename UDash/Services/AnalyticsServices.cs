@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace CRM.Services
 {
-	public  class AnalyticsServices
+	public class AnalyticsServices
 	{
 		private readonly Context _context;
 		private readonly Interfaces.IUserSession _session;
@@ -18,12 +18,12 @@ namespace CRM.Services
 		public AnalyticsModel AnalyticsBuilder()
 		{
 			var user = _session.GetUserSection();
-			
 
-			if(user != null)
+
+			if (user != null)
 			{
 				DateTime date = DateTime.Now;
-				
+
 				string initialDate = "";
 				string finalDate = "";
 				if (date.Day > 20 && date.Day <= 31)
@@ -31,7 +31,7 @@ namespace CRM.Services
 					initialDate = $"{date.Year}/{date.Month}/21";
 					finalDate = $"{date.Year}/{date.Month + 1}/20";
 				}
-				else if(date.Month == 1)
+				else if (date.Month == 1)
 				{
 					initialDate = $"{date.Year - 1}/12/21";
 					finalDate = $"{date.Year}/{date.Month}/20";
@@ -41,7 +41,7 @@ namespace CRM.Services
 					initialDate = $"{date.Year}/{date.Month - 1}/21";
 					finalDate = $"{date.Year}/{date.Month}/20";
 				}
-				
+
 
 
 				List<_CustomerModel> customer = _context.Customers.Where(x => x.UserId == user.Id).ToList();
@@ -122,10 +122,31 @@ namespace CRM.Services
 				analytics.TotalPayment = 2052.63 + commission + pwr;
 
 
+				//TotalAnnualSales
+
+
+				TotalAnnualSales totalAnnualSales = new TotalAnnualSales();
+				
+				for(int i = 0;i < customer.Count();i++)
+				{
+					if (customer[i].LastPurchaseDate >= DateTime.Parse("2023-12-21") && customer[i].LastPurchaseDate <= DateTime.Parse("2024-01-20"))
+					{
+						totalAnnualSales.January += customer[i].LastPurchaseValue.Value;
+					}
+					if (customer[i].LastPurchaseDate >= DateTime.Parse("2024-01-21") && customer[i].LastPurchaseDate <= DateTime.Parse("2024-02-20"))
+					{
+						totalAnnualSales.February += customer[i].LastPurchaseValue.Value;
+					}
+
+				}
+				
+				analytics.TotalAnnualSales = totalAnnualSales;
+
+
 				return analytics;
 			}
 			return new AnalyticsModel();
-			
+
 
 		}
 

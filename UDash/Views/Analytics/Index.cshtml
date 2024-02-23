@@ -10,8 +10,14 @@
 	string _totalPayment = totalPayment.ToString("C2", new System.Globalization.CultureInfo("pt-BR"));
 	double _baseSalary = double.Parse(Model.BaseSalary.ToString());
 	string baseSalary = _baseSalary.ToString("C2", new System.Globalization.CultureInfo("pt-BR"));
-
-
+	string januarySales = Model.TotalAnnualSales.January.ToString();
+	string feb = Model.TotalAnnualSales.February.ToString();
+	string mar = Model.TotalAnnualSales.March.ToString();
+	double? apr = Model.TotalAnnualSales.April;
+	double? may = Model.TotalAnnualSales.May;
+	double? jun = Model.TotalAnnualSales.June;
+	double? jul = Model.TotalAnnualSales.July;
+	double? aug = Model.TotalAnnualSales.August;
 }
 
 <div class="main">
@@ -82,7 +88,7 @@
 			<span class="horizontal-line"></span>
 			<div class="ticket_content">
 				@{
-					
+
 				}
 				<p>@_commission</p>
 			</div>
@@ -111,133 +117,24 @@
 	</section>
 
 	<!-- Graphics -->
-
-@*	<button class="insertDataBtn" id="insertDataBtn" type="button">Inserir dados</button>
-	<div id="insert">
-		<form asp-action="ReceberDados" asp-controller="Analytics" method="post">
-			<div class="insertContent">
-				<h4>Reuniões da semana</h4>
-				<div class="divFlexRow">
-					<div class="divFlexColumn">
-						<label>
-							Segunda:
-						
-						</label>
-						<label>
-							Terça:
-						
-						</label>
-						<label>
-							Quarta:
-						
-						</label>
-						<label>
-							Quinta:
-						
-						</label>
-						<label>
-							Sexta:
-						
-						</label>
-					</div>
-					<div class="spaceBetween"></div>
-					<div class="divFlexColumn">
-						<input class="meeting" value="@Model.Meetings.Segunda" asp-for="@Model.Meetings.Segunda" />
-						<input class="meeting" value="@Model.Meetings.Terca" asp-for="@Model.Meetings.Terca" />
-						<input class="meeting" value="@Model.Meetings.Quarta" asp-for="@Model.Meetings.Quarta" />
-						<input class="meeting" value="@Model.Meetings.Quinta" asp-for="@Model.Meetings.Quinta" />
-						<input class="meeting" value="@Model.Meetings.Sexta" asp-for="@Model.Meetings.Sexta" />
-					</div>
-				</div>
-			</div>
-			<div class="insertContent">
-				<h4>No Shows da semana</h4>
-				<div class="divFlexRow">
-					<div class="divFlexColumn">
-						<label>
-							Segunda:
-						</label>
-						<label>
-							Terça:
-						</label>
-						<label>
-							Quarta:
-						</label>
-						<label>
-							Quinta:
-						</label>
-						<label>
-							Sexta:
-						</label>
-					</div>
-					<div class="spaceBetween"></div>
-					<div class="divFlexColumn">
-						@*<input class="noshows" value="@Model.NoShows.Segunda" asp-for="@Model.NoShows.Segunda" />
-						<input class="noshows" value="@Model.NoShows.Terca" asp-for="@Model.NoShows.Terca" />
-						<input class="noshows" value="@Model.NoShows.Quarta" asp-for="@Model.NoShows.Quarta" />
-						<input class="noshows" value="@Model.NoShows.Quinta" asp-for="@Model.NoShows.Quinta" />
-						<input class="noshows" value="@Model.NoShows.Sexta" asp-for="@Model.NoShows.Sexta" />
-					</div>
-				</div>
-			</div>
-			<div class="insertContent churns">
-				<h4>Churns da semana</h4>
-
-				<div class="divFlexRow ">
-					<div class="divFlexColumn">
-						<label>
-							Churns:
-						</label>
-					</div>
-					<div class="spaceBetween"></div>
-					<div class="divFlexColumn">
-						<input type="text" class="churns" value=""  />
-					</div>
-				</div>
-			</div>
-			<div class="insertContent" style="background-image:none">
-				<button class="enviarDataBtn" type="submit">Enviar</button>
-			</div>
-
-
-		</form>
-	</div>*@
 	<section class="content_graphics-cards">
 		<article class="tickets">
 			<div class="content_graphics-content">
-				<p>Reuniões da semana</p>
+				<p>Clientes atendidos no mês</p>
 			</div>
 			<div class="content_graphics-graphics">
-				<input hidden id="meetings" value="1,2,3,4,5,10" />
-				<canvas id="myChart"></canvas>
-			</div>
-		</article>
-		<article class="tickets">
-			<div class="content_graphics-content">
-				<p>No Shows da semana</p>
-			</div>
-			<div class="content_graphics-graphics">
-				<input hidden id="noShows" value="@*@Model.NoShows*@" />
 				<canvas id="myChart2"></canvas>
 			</div>
 		</article>
 		<article class="tickets">
 			<div class="content_graphics-content">
-				<p>Reuniões mês</p>
+				<p>Total de vendas por mês</p>
 			</div>
 			<div class="content_graphics-graphics">
-				<canvas id="myChart3"></canvas>
-			</div>
-		</article>
-		<article class="tickets">
-			<div class="content_graphics-content">
-				<p>No Shows mês</p>
-			</div>
-			<div class="content_graphics-graphics">
-				<canvas id="myChart4"></canvas>
-			</div>
-		</article>
 
+				<canvas id="myChart"></canvas>
+			</div>
+		</article>
 	</section>
 
 
@@ -247,6 +144,198 @@
 	<p class="footer_link">Visite nosso site <a href="#">U.code</a> </p>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="/js/chart.js"></script>
+
+@*<script src="/js/chart.js"></script>*@
+@*<script src="/js/newChartTeste.js"></script>*@
+<script>
+	let backgroundColor = ""
+	const ctx1 = document.getElementById('myChart');
+	const ctx2 = document.getElementById('myChart2');
+	let _data = [];
+	_data[0] = @januarySales
+	_data[1] = @feb.ToString()
+	_data[2] = @mar.ToString()
+	_data[3] = @apr.ToString()
+	_data[4] = @may.ToString()
+	_data[5] = @jun.ToString()
+	_data[6] = @jul.ToString()
+	_data[7] = @aug.ToString()
+	_data[8] = @mar.ToString()
+		new Chart(ctx1, {
+
+			type: 'bar',
+			data: {
+				labels: ['jan', 'fev', 'mar', 'abr', 'maio', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'],
+				datasets: [{
+					label: 'Vendas Mês',
+					data: _data,
+					borderWidth: 0,
+
+					backgroundColor: color => {
+						// console.log(color)
+						let colors = []
+						for (let i = 0; i < _data.length; i++) {
+							if (_data[i] >= '100000') {
+
+								colors[i] = "rgba(21,168,21,0.7)"
+							}
+							else {
+								colors[i] = "rgba(227, 52, 102, 0.7)"
+							}
+						}
+						return colors
+					},
+					borderColor: color => {
+						// console.log(color)
+						let colors = []
+						for (let i = 0; i < _data.length; i++) {
+							if (_data[i] > 10) {
+
+								colors[i] = "rgba(227, 52, 102,1)"
+							}
+							else {
+								colors[i] = "rgba(232, 116, 155)"
+							}
+						}
+						return colors
+					},
+				}]
+			},
+
+			options: {
+				maintainAspectRatio: false,
+				aspectRatio: 1,
+				responsive: true,
+				barPercentage: 0.7,
+				categoryPercentage: 0.6,
+				scales: {
+					x: {
+						grid: {
+							display: false,
+						},
+						ticks: {
+							display: true,
+							color: 'rgb(0, 0, 0)',
+							padding: 10,
+							font: {
+								size: 14,
+								weight: 300,
+								family: "Open-Sans",
+								style: 'normal',
+								lineHeight: 0,
+
+
+							},
+						},
+
+					},
+
+				},
+				plugins: {
+
+					tooltip: {
+						display: true,
+						borderWidth: 0,
+						backgroundColor: 'rgba(0, 0, 255, 0.6)',
+						intersect: false
+					},
+					legend: {
+						display: false
+					}
+				},
+			},
+
+		});
+	let _data2 = ['35', '39', '60', '55', '42', '42', '60', '55', '35', '39', '42', '42'];
+
+	new Chart(ctx2, {
+
+		type: 'bar',
+		data: {
+			labels: ['jan', 'fev', 'mar', 'abr', 'maio', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'],
+			datasets: [{
+				label: 'Vendas Mês',
+				data: _data2,
+				borderWidth: 0,
+
+				backgroundColor: color => {
+					// console.log(color)
+					let colors = []
+					for (let i = 0; i < _data2.length; i++) {
+						if (_data2[i] > '50') {
+
+							colors[i] = "rgba(21,168,21,0.7)"
+						}
+						else {
+							colors[i] = "rgba(227, 52, 102, 0.7)"
+						}
+					}
+					return colors
+				},
+				borderColor: color => {
+					// console.log(color)
+					let colors = []
+					for (let i = 0; i < _data2.length; i++) {
+						if (_data[i] > '50') {
+
+							colors[i] = "rgba(227, 52, 102,1)"
+						}
+						else {
+							colors[i] = "rgba(232, 116, 155)"
+						}
+					}
+					return colors
+				},
+			}]
+		},
+
+		options: {
+			maintainAspectRatio: false,
+			aspectRatio: 1,
+			responsive: true,
+			barPercentage: 0.5,
+			categoryPercentage: 0.5,
+			scales: {
+				x: {
+					grid: {
+						display: false,
+					},
+					ticks: {
+						display: true,
+						color: 'rgb(0, 0, 0)',
+						padding: 10,
+						font: {
+							size: 14,
+							weight: 300,
+							family: "Open-Sans",
+							style: 'normal',
+							lineHeight: 0,
+
+
+						},
+					},
+
+				},
+
+			},
+			plugins: {
+
+				tooltip: {
+					display: true,
+					borderWidth: 0,
+					backgroundColor: 'rgba(0, 0, 255, 0.6)',
+					intersect: false
+				},
+				legend: {
+					display: false
+				}
+			},
+		},
+
+	});
+</script>
+
+
+
 
 

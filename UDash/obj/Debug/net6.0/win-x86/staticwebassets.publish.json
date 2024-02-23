@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "g4BAcx0S0qOfMax4jhhU/VZEc/y/0VwXXAKKXgbS2+4=",
+  "Hash": "HLvaTKRQWmdS1tFXvY13B8CB9TlXjmSfX2LSf9AmG2o=",
   "Source": "CRM",
   "BasePath": "_content/CRM",
   "Mode": "Default",
@@ -185,6 +185,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\InsertNewField.js"
+    },
+    {
+      "Identity": "Z:\\CRM\\UDash\\wwwroot\\js\\newChartTeste.js",
+      "SourceId": "CRM",
+      "SourceType": "Discovered",
+      "ContentRoot": "Z:\\CRM\\UDash\\wwwroot\\",
+      "BasePath": "_content/CRM",
+      "RelativePath": "js/newChartTeste.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\newChartTeste.js"
     },
     {
       "Identity": "Z:\\CRM\\UDash\\wwwroot\\js\\SaveToken.js",

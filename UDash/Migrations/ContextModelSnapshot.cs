@@ -31,14 +31,29 @@ namespace CRM.Migrations
                     b.Property<int>("ActiveCustomers")
                         .HasColumnType("int");
 
+                    b.Property<double?>("BaseSalary")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("Commission")
+                        .HasColumnType("float");
+
                     b.Property<int>("InactiveCustomers")
                         .HasColumnType("int");
+
+                    b.Property<double?>("PaidWeeklyRest")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("Registration")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid?>("TotalAnnualSalesId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("TotalCustomers")
                         .HasColumnType("int");
+
+                    b.Property<double?>("TotalPayment")
+                        .HasColumnType("float");
 
                     b.Property<double?>("TotalSalesMonth")
                         .HasColumnType("float");
@@ -47,6 +62,8 @@ namespace CRM.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TotalAnnualSalesId");
 
                     b.ToTable("Analytics");
                 });
@@ -91,6 +108,58 @@ namespace CRM.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ImageUrl");
+                });
+
+            modelBuilder.Entity("CRM.Models.TotalAnnualSales", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double?>("April")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("August")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("December")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("February")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("January")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("July")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("June")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("March")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("May")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("November")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("Octuber")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("September")
+                        .HasColumnType("float");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("TotalAnnualSales");
                 });
 
             modelBuilder.Entity("CRM.Models.UserModel", b =>
@@ -239,27 +308,13 @@ namespace CRM.Migrations
                     b.ToTable("Phones");
                 });
 
-            modelBuilder.Entity("CRM.Models.testeTokenValid", b =>
+            modelBuilder.Entity("CRM.Models.AnalyticsModel", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.HasOne("CRM.Models.TotalAnnualSales", "TotalAnnualSales")
+                        .WithMany()
+                        .HasForeignKey("TotalAnnualSalesId");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsValid")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Token")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TesteTokenValid");
+                    b.Navigation("TotalAnnualSales");
                 });
 
             modelBuilder.Entity("CRM.Models.LoginModel", b =>
@@ -269,6 +324,15 @@ namespace CRM.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CRM.Models.TotalAnnualSales", b =>
+                {
+                    b.HasOne("CRM.Models.UserModel", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });

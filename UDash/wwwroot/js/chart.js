@@ -8,25 +8,25 @@ const inputsNoshows = document.querySelectorAll('.noshows')
 
 let totalMeeting = 0
 let totalNoshows = 0
-inputsMeeting.forEach(function (item) {
-    _data.push(parseInt(item.value))
-    totalMeeting += parseInt(item.value)
+//inputsMeeting.forEach(function (item) {
+//    _data.push(parseInt(item.value))
+//    totalMeeting += parseInt(item.value)
 
-})
+//})
 inputsNoshows.forEach(function (item) {
     _data2.push(parseInt(item.value))
     totalNoshows += parseInt(item.value)
 
 })
 
-_data.push(totalMeeting)
+/*_data.push(totalMeeting)*/
 _data2.push(totalNoshows)
 
 new Chart(ctx1, {
 
     type: 'bar',
     data: {
-        labels: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Total'],
+        labels: ['jan', 'fev', 'mar', 'abr', 'maio', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'],
         datasets: [{
             label: 'Reuniões mês',
             data: _data,
@@ -36,7 +36,7 @@ new Chart(ctx1, {
                 // console.log(color)
                 let colors = []
                 for (let i = 0; i < _data.length; i++) {
-                    if (_data[i] > 10) {
+                    if (_data[i] > 100.000) {
 
                         colors[i] = "rgba(227, 52, 102,1)"
                     }

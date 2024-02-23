@@ -1,44 +1,61 @@
 ﻿@model CRM.Models.ViewModels._CustomerCreateViewModel
 
-@*@{
-
-	var emails = Model.Emails;
-	var phones = Model.Phones;
-}*@
 
 <div class="main">
 	@await Component.InvokeAsync("Header")
+	@if (TempData["ErrorMessage"] != null)
+	{
+		<div class="alertSendFile">
+			<div id="spanAlert" class="spanAlert">
+				<span>
+					<b>@TempData["ErrorMessage"]</b>
+				</span>
+			</div>
+		</div>
+
+	}
+	@if (TempData["SuccessMessage"] != null)
+	{
+		<div class="alertSendFile">
+			<div id="spanAlert" class="spanAlert spanAlertSuccess">
+				<span>
+					<b>@TempData["SuccessMessage"]</b>
+				</span>
+			</div>
+		</div>
+
+	}
 	<div class="formCreateCustomer">
 		<h1>Cadastro de Cliente</h1>
 
-		<form asp-action="Create" asp-controller="Customer" method="post">
+		<form class="customerCreateForm" asp-action="Create" asp-controller="Customer" method="post">
 			<label for="codigo" class="span3">
 				<p>Código</p>
-				<input id="codigo" type="text" asp-for="Codigo" maxlength="5" />
+				<input id="codigo" value="" type="text" asp-for="Codigo" maxlength="5" />
 			</label>
 			<label for="cnpj" class="span3">
 				<p class="bgWhite">
 					Cnpj
 				</p>
-				<input id="cnpj" type="text" asp-for="Cnpj" />
+				<input id="cnpj" value="" type="text" asp-for="Cnpj" />
 			</label>
 			<label for="razaoSocial" class="span3">
 				<p>
 					Razão Social
 				</p>
-				<input id="razaoSocial" type="text" asp-for="RazaoSocial" />
+				<input id="razaoSocial" value="" type="text" asp-for="RazaoSocial" />
 			</label>
 			<label for="contato" class="span3 ">
 				<p class="bgWhite">
 					Contato
 				</p>
-				<input id="contato" type="text" asp-for="Contato" />
+				<input id="contato" value="" type="text" asp-for="Contato" />
 			</label>
 			<label for="cidade" class="span3 ">
 				<p class="bgWhite">
 					Cidade
 				</p>
-				<input id="cidade" type="text" asp-for="Cidade" />
+				<input id="cidade" value="" type="text" asp-for="Cidade" />
 			</label>
 			<label for="uf" class="select span3">
 				<p>
@@ -83,7 +100,7 @@
 							<i class="fa-solid fa-plus"></i>
 						</a>
 					</p>
-					<input id="email" type="email" asp-for="Emails" name="Emails" />
+					<input id="email" value="" type="email" asp-for="Emails" name="Emails" />
 				</label>
 			</div>
 
@@ -110,3 +127,4 @@
 	</div>
 </div>
 <script src="/js/InsertNewField.js"></script>
+<script src="/js/Alerts.js"></script>
